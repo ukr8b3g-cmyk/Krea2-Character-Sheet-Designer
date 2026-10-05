@@ -49,13 +49,20 @@ def compute_layout(state: dict[str, Any], *, max_resolution: int = DEFAULT_MAX_R
     return {**geometry, 'panels': [{**p, 'view': VIEW_DETAILS[p['id']][0], 'content': panel_content(state, p['id'])} for p in geometry['panels']]}
 
 
-def compile_prompt(state: dict[str, Any], layout: dict[str, Any], *, layout_reference: bool = False) -> str:
+def compile_prompt(state: dict[str, Any], layout: dict[str, Any], *, layout_reference: bool = False, builtin_layout: bool = False) -> str:
     views = state['views']
     portraits = [v for v in PORTRAIT_IDS if v in views]
     bodies = [v for v in BODY_IDS if v in views]
     details = [v for v in ('hands', 'feet') if v in views]
     active = active_part_prompts(state)
-    if layout_reference:
+    if builtin_layout:
+        lines = [
+            'Edit Image 1 into one finished character reference sheet. Image 1 is the layout canvas; Image 2 is the ONLY character identity, clothing, color and rendering-style reference.',
+            'Replace each gray mannequin guide in Image 1 one-for-one with the corresponding view of the character from Image 2. Preserve the canvas, position, framing, relative size and white spacing of each guide. Replace all gray mannequin surfaces with finished character details; do not keep gray plastic, ghosted or unfinished figures.',
+            'Use Image 2 for appearance only; do not copy its pose, composition or background. Keep the layout from Image 1 and do not introduce extra views, full-body figures in portrait regions, frames or labels.',
+        ]
+        identity = 'Image 2'
+    elif layout_reference:
         lines = [
             'Create one clean static character reference sheet on a pure white canvas.',
             'Image 1 is ONLY a composition example: use its placement, framing, scale and spacing when they agree with the selected views below. Image 2 is the ONLY character identity and appearance reference.',
@@ -65,8 +72,15 @@ def compile_prompt(state: dict[str, Any], layout: dict[str, Any], *, layout_refe
     else:
         lines = ['Transform the reference image into one clean static character reference sheet on a pure white canvas.']
         identity = 'the character reference'
-    lines.append(f"Show exactly {len(views)} separate depictions of the SAME character. Show only these selected views: " + '; '.join(VIEW_DETAILS[v][0] for v in views) + '.')
-    if not details:
+    if builtin_layout:
+        lines.append(f"Keep exactly {len(portraits)} head-and-chest portraits, {len(bodies)} full-body views and {len(details)} isolated hand/foot detail studies. All depict the SAME character. Show only these selected views: " + '; '.join(VIEW_DETAILS[v][0] for v in views) + '.')
+        for index, panel in enumerate(layout['panels'], 1):
+            lines.append(f"{index}. {VIEW_DETAILS[panel['id']][1]}")
+    else:
+        lines.append(f"Show exactly {len(views)} separate depictions of the SAME character. Show only these selected views: " + '; '.join(VIEW_DETAILS[v][0] for v in views) + '.')
+    if builtin_layout:
+        pass  # The generated image already specifies placement; do not redraw it in prose.
+    elif not details:
         lines.append('Arrange all selected views side by side in ONE horizontal row, in the listed order.')
     else:
         lines.append('Place the portrait/detail region on the left and any full-body columns to its right.')
@@ -76,10 +90,11 @@ def compile_prompt(state: dict[str, Any], layout: dict[str, Any], *, layout_refe
             lines.append('Stack the hands detail above the footwear detail in the left column.')
         else:
             lines.append('The selected detail occupies its own full-height column.')
-    lines.append('Read the following approximate positions as composition guidance, never as text or lines to draw. Percentages run from the top-left of the canvas.')
-    for index, panel in enumerate(layout['panels'], 1):
-        left, top, width, height = [v * 100 for v in panel['rect']]
-        lines.append(f"{index}. {VIEW_DETAILS[panel['id']][1]} Region: left {left:.1f}%, top {top:.1f}%, width {width:.1f}%, height {height:.1f}%.")
+    if not builtin_layout:
+        lines.append('Read the following approximate positions as composition guidance, never as text or lines to draw. Percentages run from the top-left of the canvas.')
+        for index, panel in enumerate(layout['panels'], 1):
+            left, top, width, height = [v * 100 for v in panel['rect']]
+            lines.append(f"{index}. {VIEW_DETAILS[panel['id']][1]} Region: left {left:.1f}%, top {top:.1f}%, width {width:.1f}%, height {height:.1f}%.")
     if portraits and bodies:
         lines.append('The portraits have larger heads than the full-body figures. The portraits are chest-up, not additional full-body views.')
     if bodies:
@@ -95,14 +110,14 @@ def compile_prompt(state: dict[str, Any], layout: dict[str, Any], *, layout_refe
     return '\n\n'.join(lines) + '\n'
 
 
-def compile_state(state_json: str, *, max_resolution: int = DEFAULT_MAX_RESOLUTION, layout_reference: bool = False) -> dict[str, Any]:
+def compile_state(state_json: str, *, max_resolution: int = DEFAULT_MAX_RESOLUTION, layout_reference: bool = False, builtin_layout: bool = False) -> dict[str, Any]:
     state = parse_state(state_json, max_resolution=max_resolution)
     layout = compute_layout(state, max_resolution=max_resolution)
     width, height = layout['canvas']
     pixels = width * height
     return {
         'state_json': serialize_state(state), 'width': width, 'height': height,
-        'layout': layout, 'prompt': compile_prompt(state, layout, layout_reference=layout_reference),
+        'layout': layout, 'prompt': compile_prompt(state, layout, layout_reference=layout_reference, builtin_layout=builtin_layout),
         'pixel_count': pixels, 'megapixels': pixels / 1_000_000,
         'experimental': pixels > EXPERIMENTAL_PIXEL_THRESHOLD,
         'max_resolution': max_resolution,

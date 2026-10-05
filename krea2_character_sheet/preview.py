@@ -7,7 +7,7 @@ PREVIEW_PATH = "/krea2_character_sheet_designer/preview"
 HTTP_MAX_BYTES = 3 * STATE_MAX_BYTES
 
 
-def compile_preview_request(body: bytes, *, max_resolution: int, layout_reference: bool = False) -> dict:
+def compile_preview_request(body: bytes, *, max_resolution: int, layout_reference: bool = False, builtin_layout: bool = False) -> dict:
     if len(body) > HTTP_MAX_BYTES:
         raise StateValidationError(f"Preview request exceeds the {HTTP_MAX_BYTES}-byte limit.", "request_too_large")
     try:
@@ -17,10 +17,10 @@ def compile_preview_request(body: bytes, *, max_resolution: int, layout_referenc
     envelope = decode_json(text, byte_limit=HTTP_MAX_BYTES)
     if type(envelope) is not dict or set(envelope) != {"state_json"}:
         raise StateValidationError("Preview request must be an object containing only state_json.", "invalid_request")
-    return compile_state(envelope["state_json"], max_resolution=max_resolution, layout_reference=layout_reference)
+    return compile_state(envelope["state_json"], max_resolution=max_resolution, layout_reference=layout_reference, builtin_layout=builtin_layout)
 
 
-async def preview(request, *, layout_reference=False):
+async def preview(request, *, layout_reference=False, builtin_layout=False):
     from aiohttp import web  # Supplied by ComfyUI, not a pure-compiler dependency.
 
     def error(code, message, status):
@@ -36,7 +36,7 @@ async def preview(request, *, layout_reference=False):
         if len(body) > HTTP_MAX_BYTES:
             return error("request_too_large", f"Preview request exceeds the {HTTP_MAX_BYTES}-byte limit.", 413)
     try:
-        result = compile_preview_request(bytes(body), max_resolution=runtime_max_resolution(), layout_reference=layout_reference)
+        result = compile_preview_request(bytes(body), max_resolution=runtime_max_resolution(), layout_reference=layout_reference, builtin_layout=builtin_layout)
     except StateValidationError as exc:
         return error(exc.code, str(exc), 413 if exc.code in ("state_too_large", "request_too_large") else 400)
     except Exception as exc:
@@ -49,6 +49,10 @@ async def preview(request, *, layout_reference=False):
 
 async def layout_preview(request):
     return await preview(request, layout_reference=True)
+
+
+async def builtin_layout_preview(request):
+    return await preview(request, layout_reference=True, builtin_layout=True)
 
 
 def register_routes() -> bool:
@@ -66,5 +70,6 @@ def register_routes() -> bool:
         return True
     instance.routes.post(PREVIEW_PATH)(preview)
     instance.routes.post("/krea2_character_sheet_designer/layout-reference/preview")(layout_preview)
+    instance.routes.post("/krea2_character_sheet_designer/layout-image/preview")(builtin_layout_preview)
     setattr(instance, flag, True)
     return True

@@ -13,6 +13,7 @@ const EN = {
   autoHint: 'Auto keeps the requested full-body panel height.', manualHint: 'Manual keeps your canvas size when views change.',
   layout: 'SHEET PREVIEW', diagram: 'Layout guide', experimental: 'Experimental', pixels: 'pixels',
   caveat: 'A prompt layout guide. Exact geometry and generation quality are not guaranteed.',
+  imageCaveat: 'Selected mannequins are output as layout_image. Connect it as Image 1 and the character as Image 2. Exact placement and identity separation are not guaranteed.',
   resolutionWarning: 'High resolution is experimental. This inherited display threshold is not a Krea2 quality or VRAM limit.',
   committed: 'Saved immediately', pending: 'Updating layout…', stale: 'Previous layout · updating', previous: 'Previous layout', unavailable: 'Preview unavailable', retry: 'Retry preview', empty: 'Waiting for Python layout',
   draft: 'Uncommitted values are not saved or queued.', invalid: 'Saved JSON is invalid. Its original value is preserved.', editJSON: 'Repair saved JSON', apply: 'Apply valid JSON', rawHint: 'Only Apply changes the saved input.',
@@ -36,6 +37,7 @@ const JA = {
   autoHint: 'Autoは指定した全身パネルの高さを維持します。', manualHint: 'Manualはビューを変えても幅・高さを維持します。',
   layout: 'シートプレビュー', diagram: '配置ガイド', experimental: 'Experimental', pixels: '画素',
   caveat: '配置はプロンプト上の指示です。正確な形状や生成品質は保証しません。',
+  imageCaveat: '選択したマネキンをlayout_imageとして出力します。画像1へ配置画像、画像2へ人物を接続。厳密な配置・人物分離は保証しません。',
   resolutionWarning: '高解像度は試験対象です。この既存の表示閾値はKrea2の品質・VRAM上限ではありません。',
   committed: '選択は即時保存', pending: '配置更新中…', stale: '前の配置・更新中', previous: '前の配置', unavailable: 'プレビュー取得失敗', retry: '再試行', empty: 'Pythonの配置を取得中',
   draft: '未確定の値は保存・実行されません。', invalid: '保存JSONが不正です。原文を保持しています。', editJSON: '保存JSONを修正', apply: '有効なJSONを適用', rawHint: '「適用」を押したときだけ保存値を変更します。',
@@ -282,7 +284,7 @@ export function createDesignerUI({controller, profile = PROFILE, locale = 'en', 
     const problem = controller.error || localError || controller.previewError;
     errorBox.textContent = problem ? `${controller.error ? `${t.invalid} ` : ''}${errorText(problem, language)}` : ''; errorBox.hidden = !problem;
     retry.textContent = t.retry; retry.hidden = !controller.previewError || !state;
-    footer.textContent = activeTab === 'parts' ? t.partGuide : t.caveat;
+    footer.textContent = activeTab === 'parts' ? t.partGuide : profile.builtinLayout ? t.imageCaveat : t.caveat;
     summary.textContent = t.editJSON; rawHint.textContent = t.rawHint; apply.textContent = t.apply;
     jsonDetails.hidden = !controller.error && !controller.previewError;
     if (lastRaw !== controller.raw) { rawInput.value = typeof controller.raw === 'string' ? controller.raw : String(controller.raw); lastRaw = controller.raw; }

@@ -8,10 +8,17 @@ export const PROFILE = Object.freeze({
 export const LAYOUT_PROFILE = Object.freeze({
   ...PROFILE,
   nodeType: 'Krea2LayoutReferenceSheetDesigner',
-  displayName: 'Krea2 Layout Reference Sheet Designer (Experimental)',
+  displayName: 'Krea2 External Layout Designer (Legacy)',
   previewPath: '/krea2_character_sheet_designer/layout-reference/preview',
 });
-export const PROFILES = Object.freeze([PROFILE, LAYOUT_PROFILE]);
+export const LAYOUT_IMAGE_PROFILE = Object.freeze({
+  ...PROFILE,
+  nodeType: 'Krea2LayoutImageSheetDesigner',
+  displayName: 'Krea2 Layout Image Sheet Designer (Experimental)',
+  previewPath: '/krea2_character_sheet_designer/layout-image/preview',
+  builtinLayout: true,
+});
+export const PROFILES = Object.freeze([PROFILE, LAYOUT_PROFILE, LAYOUT_IMAGE_PROFILE]);
 export function profileFor(node) {
   return PROFILES.find(p => p.nodeType === node.comfyClass || p.nodeType === node.type);
 }

@@ -90,9 +90,13 @@ test('local artwork IDs are safe, distinct and all seven views are supported',()
  assert.throws(()=>avatarSVG('unknown'));assert.throws(()=>artworkRect('unknown'));
 });
 
-test('both Krea2 profiles are isolated from H3 and Qwen', async()=>{
- const {LAYOUT_PROFILE, PROFILES, profileFor}=await import('../../web/profile.js');
- assert.equal(PROFILES.length,2);
+test('all Krea2 profiles are isolated from H3 and Qwen', async()=>{
+ const {LAYOUT_PROFILE, LAYOUT_IMAGE_PROFILE, PROFILES, profileFor}=await import('../../web/profile.js');
+ assert.equal(PROFILES.length,3);
+ assert.equal(profileFor({type:LAYOUT_IMAGE_PROFILE.nodeType}),LAYOUT_IMAGE_PROFILE);
+ assert.equal(profileFor({comfyClass:LAYOUT_IMAGE_PROFILE.nodeType}),LAYOUT_IMAGE_PROFILE);
+ assert.equal(LAYOUT_IMAGE_PROFILE.builtinLayout,true);
+ assert.equal(LAYOUT_IMAGE_PROFILE.previewPath,'/krea2_character_sheet_designer/layout-image/preview');
  assert.equal(profileFor({type:LAYOUT_PROFILE.nodeType}),LAYOUT_PROFILE);
  assert.equal(profileFor({comfyClass:LAYOUT_PROFILE.nodeType}),LAYOUT_PROFILE);
  assert.equal(profileFor({type:'QwenImage21CharacterSheetDesigner'}),undefined);

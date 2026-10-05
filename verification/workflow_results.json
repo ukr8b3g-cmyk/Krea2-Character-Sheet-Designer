@@ -8,9 +8,12 @@
   },
   {
     "file": "Krea2_Layout_Reference_Designer_Experimental.json",
-    "nodes": 18,
-    "links": 28,
+    "nodes": 7,
+    "links": 7,
+    "subgraphs": 1,
+    "flattened_nodes": 18,
+    "validation_scope": "recursive static links, promoted controls and flattened source paths; not live graphToPrompt",
     "status": "static_pass",
-    "sha256": "e0923323b0af6efd99d1c798e09b326f291a3a8e154611ba83d5b193823e19bb"
+    "sha256": "7a734d90a94d7246b30b38880948568345e4a0ccac642aa1968aaf4d62d17772"
   }
 ]

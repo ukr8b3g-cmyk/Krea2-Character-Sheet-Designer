@@ -1,4 +1,4 @@
-"""Two role-specific nodes share the exact same canonical Designer state."""
+"""Role-specific nodes share the exact same canonical Designer state."""
 import importlib
 import json
 from .compiler import DEFAULT_STATE_JSON, StateValidationError, compile_state
@@ -28,6 +28,7 @@ class Krea2CharacterSheetDesigner:
     RETURN_NAMES = ('prompt', 'width', 'height')
     FUNCTION = 'compile'
     LAYOUT_REFERENCE = False
+    BUILTIN_LAYOUT = False
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -38,7 +39,7 @@ class Krea2CharacterSheetDesigner:
     @classmethod
     def VALIDATE_INPUTS(cls, state_json):
         try:
-            compile_state(state_json, max_resolution=runtime_max_resolution(), layout_reference=cls.LAYOUT_REFERENCE)
+            compile_state(state_json, max_resolution=runtime_max_resolution(), layout_reference=cls.LAYOUT_REFERENCE, builtin_layout=cls.BUILTIN_LAYOUT)
         except StateValidationError as exc:
             return str(exc)
         return True
@@ -49,7 +50,24 @@ class Krea2CharacterSheetDesigner:
 
 
 class Krea2LayoutReferenceSheetDesigner(Krea2CharacterSheetDesigner):
-    DESCRIPTION = ('Experimental two-reference variant. Image 1 = layout example; Image 2 = character identity. '
+    DEPRECATED = True
+    DESCRIPTION = ('Legacy external-layout variant retained for saved workflows. Image 1 = layout example; Image 2 = character identity. '
                    'Use the supplied two-reference workflow. Both images influence generation; '
                    'layout-only isolation and exact geometry are not guaranteed. No automatic atlas image input.')
     LAYOUT_REFERENCE = True
+
+
+class Krea2LayoutImageSheetDesigner(Krea2CharacterSheetDesigner):
+    DESCRIPTION = ('Experimental built-in layout image. Connect layout_image as Image 1 and the required '
+                   'character reference as Image 2 using the supplied workflow. The selected mannequin '
+                   'views become the image input; exact geometry and identity separation are not guaranteed.')
+    RETURN_TYPES = ('STRING', 'INT', 'INT', 'IMAGE')
+    RETURN_NAMES = ('prompt', 'width', 'height', 'layout_image')
+    LAYOUT_REFERENCE = True
+    BUILTIN_LAYOUT = True
+
+    def compile(self, state_json):
+        from .layout_image import layout_image_tensor
+        result = compile_state(state_json, max_resolution=runtime_max_resolution(),
+                               layout_reference=True, builtin_layout=True)
+        return result['prompt'], result['width'], result['height'], layout_image_tensor(result['layout'])

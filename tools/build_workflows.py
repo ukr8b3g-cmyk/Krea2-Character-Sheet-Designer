@@ -12,13 +12,18 @@ import uuid
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from krea2_character_sheet.compiler import compile_state
+from tools.workflow_graph import object_link, rebuild
 SOURCE = ROOT / 'tools/upstream/krea2_identity_edit.json'
+LAYOUT_SOURCE = ROOT / 'tools/upstream/krea2_designer_subgraph.json'
+LAYOUT_SOURCE_SHA256 = '2054a784eea21ebce5342f14fbed87efc99a79aec63d22575d0bb4b5d79a0b03'
 AUTHOR_SHA = '86f886dac23013d88996e3a2e99093ba44d322fb'
 SOURCE_BLOB = 'a707d8d27cb8504f8a63ab38babe3855ac797c59'
 STATE = {'schema_version': 1, 'views': ['face_front','face_left','body_front','body_left','body_back'], 'size': {'mode': 'manual','body_height':672,'manual_width':1696,'manual_height':768}}
 
 
 def build(layout_reference=False):
+    if layout_reference:
+        return build_layout_image()
     raw = SOURCE.read_bytes()
     assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest() == SOURCE_BLOB
     source = json.loads(raw)
@@ -91,6 +96,121 @@ def build(layout_reference=False):
             'variant':'layout_reference_experimental' if layout_reference else 'identity_only',
             'layout_reference_isolation':'prompt_guidance_only' if layout_reference else 'not_used',
             'validation':'static only; real ComfyUI/GPU not run'}},'version':0.4}
+
+
+def build_layout_image():
+    """Adapt the supplied subgraph workflow, with built-in layout first.
+
+    The sanitized source retains its subgraph IDs, promoted controls, named
+    widget values, preview exposure and sampling settings. Only the second
+    reference branch and the Designer's generated layout output are added.
+    """
+    raw = LAYOUT_SOURCE.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == LAYOUT_SOURCE_SHA256
+    workflow = json.loads(raw)
+    nodes = {node['id']: node for node in workflow['nodes']}
+    graph, = workflow['definitions']['subgraphs']
+    inner = {node['id']: node for node in graph['nodes']}
+    designer, host = nodes[200], nodes[203]
+    state_json = designer['widgets_values'][0]
+    compiled = compile_state(state_json, layout_reference=True, builtin_layout=True)
+    node_type = 'Krea2LayoutImageSheetDesigner'
+    designer['type'] = node_type
+    designer['title'] = 'Krea2 Layout Image Sheet Designer (Experimental)'
+    designer['properties']['Node name for S&R'] = node_type
+    # This is a new node contract; the old three-output type remains compatible.
+    designer['properties'].pop('ver', None)
+    designer['outputs'].append({'name': 'layout_image', 'type': 'IMAGE', 'links': None})
+    designer['pos'] = [25, 80]
+    graph['name'] = 'Krea2 Identity Edit / built-in layout + character'
+    graph['inputs'][0]['label'] = 'Image 1: built-in layout'
+    graph['inputs'].append({
+        'id': str(uuid.uuid5(uuid.NAMESPACE_URL, graph['id'] + '#image_b')),
+        'name': 'image_b', 'type': 'IMAGE', 'label': 'Image 2: character identity',
+        'linkIds': [], 'pos': [866, 645]})
+    graph['inputNode']['bounding'][3] += 20
+    # Explicitly expose every supplied promoted control, in boundary order.
+    # Matching names and preserving both value formats avoids silent shifts.
+    existing = {port['name']: port for port in host['inputs']}
+    host['inputs'] = []
+    for port in graph['inputs']:
+        entry = copy.deepcopy(existing.get(port['name'], {}))
+        entry.update(name=port['name'], type=port['type'], link=None)
+        if port['type'] != 'IMAGE':
+            entry['widget'] = {'name': port['name']}
+        if 'label' in port:
+            entry['label'] = port['label']
+        host['inputs'].append(entry)
+    host['title'] = graph['name']
+    host['pos'], host['size'] = [950, 80], [600, 780]
+    host['widgets_values'][0] = compiled['prompt']
+    host['widgets_values_named']['prompt'] = compiled['prompt']
+    inner[84]['widgets_values'][0] = compiled['prompt']
+    inner[84]['widgets_values_named']['prompt'] = compiled['prompt']
+    inner[84]['title'] = 'Positive / image 1 layout, image 2 character'
+    inner[85]['title'] = 'Negative / blank / same layout-first order'
+    inner[73]['title'] = 'Image 1: built-in layout / VAE'
+    identity_vae = copy.deepcopy(inner[73])
+    identity_vae.update(id=92, title='Image 2: character identity / VAE', pos=[1520, 920])
+    graph['nodes'].append(identity_vae)
+    image_b_slot = len(graph['inputs']) - 1
+    graph['links'].extend([
+        object_link(43, -10, image_b_slot, 84, 2, 'IMAGE'),
+        object_link(44, -10, image_b_slot, 85, 2, 'IMAGE'),
+        object_link(45, -10, image_b_slot, 92, 0, 'IMAGE'),
+        object_link(46, -10, image_b_slot, 79, 6, 'IMAGE'),
+        object_link(47, 57, 0, 92, 1, 'VAE'),
+        object_link(48, 92, 0, 79, 2, 'LATENT'),
+    ])
+    # Replace the former single-image source with the generated layout and add
+    # the character exclusively to B, including both raw-pixel and latent paths.
+    workflow['links'][0] = [31, 200, 3, 203, 0, 'IMAGE']
+    workflow['links'].extend([
+        [43, 72, 0, 203, image_b_slot, 'IMAGE'],
+        [44, 200, 3, 204, 0, 'IMAGE'],
+    ])
+    nodes[72]['title'] = 'Image 2: CHARACTER IDENTITY / required'
+    nodes[72]['pos'], nodes[72]['size'] = [25, 1130], [430, 550]
+    nodes[29]['widgets_values'] = ['Krea2_Designer_LayoutImage']
+    nodes[29]['widgets_values_named'] = {'filename_prefix': 'Krea2_Designer_LayoutImage'}
+    nodes[29]['pos'] = [1640, 80]
+    workflow['nodes'].append({
+        'id': 204, 'type': 'PreviewImage', 'pos': [950, 940], 'size': [600, 340],
+        'flags': {}, 'order': 0, 'mode': 0, 'inputs': [{'name': 'images', 'type': 'IMAGE', 'link': None}],
+        'outputs': [], 'properties': {'Node name for S&R': 'PreviewImage'},
+        'title': 'Image 1: generated layout / actual model input', 'widgets_values': []})
+    nodes[201].update(pos=[25, 1740], size=[870, 360],
+        title='Krea2 Layout Image Sheet Designer / 使い方', widgets_values=[
+            'Image 1 = Designer内蔵のlayout_image、Image 2 = 人物リファレンス（必須）。\n'
+            '選択ビュー・Auto/Manual・出力寸法から白背景のレイアウト画像を生成して接続します。外部レイアウト画像は不要です。\n'
+            'positive / negative / VAE / pixel pathの全経路でレイアウト→人物の順序です。\n'
+            'ref_boost=4は最後の参照（人物）、ref_boost_a=1は最初の参照（レイアウト）。\n'
+            'サブグラフ表面でseed / steps / CFG / VAE / CLIP / diffusion model / LoRAを選択できます。\n'
+            'モデル・LoRA・人物画像の仮名を手元のファイルへ変更して実行。int8-convrotは提供workflowの選択を維持。重みは同梱しません。\n'
+            '初期1696×768・5ビュー・10 steps / CFG 1 / euler / simple / denoise 1 / fixed seed。\n'
+            '同じlatentをKSamplerとtarget_latentへ接続。高解像度は自動縮小しません。まず約1MP〜2MP以下から確認。\n'
+            '白背景・枠線なし・profileは画面左向き。内蔵マネキンの外観が混ざる可能性があり、厳密な配置・人物保持は保証しません。\n'
+            '静的検証のみ。実ComfyUIの読込、Queue、GPU品質は未検証。\n'
+            '専用ノード lbouaraba/comfyui-krea2edit と Identity Edit v1.2 LoRAが別途必要。Krea社公式workflowではありません。'])
+    nodes[201].pop('widgets_values_named', None)
+    nodes[202]['pos'] = [25, 2150]
+    nodes[202]['widgets_values'][0] = (
+        'Modified 2026-10-05 from the supplied subgraph workflow: built-in layout output, '
+        'layout-first / identity-second branches, promoted controls, sanitized filenames.\n\n'
+        + nodes[202]['widgets_values'][0])
+    nodes[202].pop('widgets_values_named', None)
+    workflow['id'] = str(uuid.uuid5(uuid.NAMESPACE_URL,
+        'https://github.com/ukr8b3g-cmyk/Krea2-Character-Sheet-Designer#' + node_type))
+    workflow['extra']['ds'] = {'scale': 0.55, 'offset': [70, 30]}
+    workflow['extra']['krea2_designer_provenance'].update(
+        variant='builtin_layout_image_experimental',
+        layout_reference_isolation='prompt_guidance_only',
+        layout_source='Designer layout_image output / shared selected-view geometry',
+        sanitized_source_sha256=LAYOUT_SOURCE_SHA256,
+        validation='recursive static graph and boundary flattening only; real ComfyUI/GPU not run')
+    rebuild(graph)
+    rebuild(workflow)
+    return workflow
 
 if __name__=='__main__':
     for optional,name in [(False,'Krea2_Character_Sheet_Designer.json'),(True,'Krea2_Layout_Reference_Designer_Experimental.json')]:

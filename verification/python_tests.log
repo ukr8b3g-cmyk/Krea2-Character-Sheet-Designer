@@ -6,12 +6,12 @@ test_envelope_is_exactly_one_string_field_and_strict_json (test_contract.Preview
 test_route_registration_is_independent_and_idempotent (test_contract.PreviewEnvelopeContract.test_route_registration_is_independent_and_idempotent) ... ok
 test_route_registration_without_server_or_instance_is_safe (test_contract.PreviewEnvelopeContract.test_route_registration_without_server_or_instance_is_safe) ... ok
 test_chunked_payload_limit_is_enforced_without_content_length (test_contract.PreviewHTTPContract.test_chunked_payload_limit_is_enforced_without_content_length) ... ok
-test_chunked_unknown_length_success_in_both_modes (test_contract.PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes) ... Executing <Task finished name='Task-8' coro=<PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes() done, defined at ./tests/test_contract.py:578> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.126 seconds
+test_chunked_unknown_length_success_in_both_modes (test_contract.PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes) ... Executing <Task finished name='Task-8' coro=<PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes() done, defined at /workspace/scratch/d8aef2f8790b/Krea2-Character-Sheet-Designer/tests/test_contract.py:579> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.117 seconds
 ok
 test_http_respects_live_core_max_resolution (test_contract.PreviewHTTPContract.test_http_respects_live_core_max_resolution) ... ok
-test_http_validation_statuses_and_codes (test_contract.PreviewHTTPContract.test_http_validation_statuses_and_codes) ... Executing <Task finished name='Task-18' coro=<PreviewHTTPContract.test_http_validation_statuses_and_codes() done, defined at ./tests/test_contract.py:605> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.379 seconds
+test_http_validation_statuses_and_codes (test_contract.PreviewHTTPContract.test_http_validation_statuses_and_codes) ... Executing <Task finished name='Task-18' coro=<PreviewHTTPContract.test_http_validation_statuses_and_codes() done, defined at /workspace/scratch/d8aef2f8790b/Krea2-Character-Sheet-Designer/tests/test_contract.py:606> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.379 seconds
 ok
-test_internal_error_is_sanitized_and_never_returns_user_prompt (test_contract.PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt) ... Executing <Task finished name='Task-23' coro=<PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt() done, defined at ./tests/test_contract.py:624> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.145 seconds
+test_internal_error_is_sanitized_and_never_returns_user_prompt (test_contract.PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt) ... Executing <Task finished name='Task-23' coro=<PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt() done, defined at /workspace/scratch/d8aef2f8790b/Krea2-Character-Sheet-Designer/tests/test_contract.py:625> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.166 seconds
 ok
 test_oversized_declared_length_is_rejected_before_read (test_contract.PreviewHTTPContract.test_oversized_declared_length_is_rejected_before_read) ... ok
 test_real_aiohttp_routes_return_matching_node_outputs (test_contract.PreviewHTTPContract.test_real_aiohttp_routes_return_matching_node_outputs) ... ok
@@ -37,9 +37,25 @@ test_runtime_limits_cover_inactive_fields_and_computed_auto_size (test_contract.
 test_strict_validation_fixture_acceptance_and_error_codes (test_contract.StateGeometryContract.test_strict_validation_fixture_acceptance_and_error_codes) ... ok
 test_utf16_limit_and_literal_whitespace_preservation (test_contract.StateGeometryContract.test_utf16_limit_and_literal_whitespace_preservation) ... ok
 test_v2_requires_exact_parts_schema_and_v1_never_migrates (test_contract.StateGeometryContract.test_v2_requires_exact_parts_schema_and_v1_never_migrates) ... ok
+test_all_127_selections_render_only_selected_regions (test_layout_image.BuiltinLayoutContracts.test_all_127_selections_render_only_selected_regions) ... ok
+test_all_selections_sizes_schemas_preserve_state_and_geometry (test_layout_image.BuiltinLayoutContracts.test_all_selections_sizes_schemas_preserve_state_and_geometry) ... ok
+test_atlas_crops_and_mirror_direction_match_frontend (test_layout_image.BuiltinLayoutContracts.test_atlas_crops_and_mirror_direction_match_frontend) ... ok
+test_exact_crop_and_profile_pixels_match_mirrored_atlas (test_layout_image.BuiltinLayoutContracts.test_exact_crop_and_profile_pixels_match_mirrored_atlas) ... ok
+test_first_three_ports_and_legacy_nodes_stay_compatible (test_layout_image.BuiltinLayoutContracts.test_first_three_ports_and_legacy_nodes_stay_compatible) ... ok
+test_invalid_state_rejected_before_image_or_torch_allocation (test_layout_image.BuiltinLayoutContracts.test_invalid_state_rejected_before_image_or_torch_allocation) ... ok
+test_node_adapter_and_preview_share_exact_raster_and_prompt (test_layout_image.BuiltinLayoutContracts.test_node_adapter_and_preview_share_exact_raster_and_prompt) ... ok
+test_real_cpu_torch_tensor (test_layout_image.BuiltinLayoutContracts.test_real_cpu_torch_tensor) ... skipped 'torch is not installed; real tensor execution not tested'
+test_tiny_auto_and_high_resolution_images_keep_requested_canvas (test_layout_image.BuiltinLayoutContracts.test_tiny_auto_and_high_resolution_images_keep_requested_canvas) ... ok
+test_real_new_preview_route_matches_compiler_without_image_dependencies (test_layout_image.BuiltinLayoutHTTPContracts.test_real_new_preview_route_matches_compiler_without_image_dependencies) ... ok
+test_basic_workflow_is_byte_identical (test_workflows.WorkflowContracts.test_basic_workflow_is_byte_identical) ... ok
 test_both_graphs (test_workflows.WorkflowContracts.test_both_graphs) ... ok
+test_builtin_layout_sources_cross_subgraph_boundary (test_workflows.WorkflowContracts.test_builtin_layout_sources_cross_subgraph_boundary) ... ok
+test_missing_negative_b_and_stale_boundary_are_rejected (test_workflows.WorkflowContracts.test_missing_negative_b_and_stale_boundary_are_rejected) ... ok
+test_nested_subgraph_resolution (test_workflows.WorkflowContracts.test_nested_subgraph_resolution) ... ok
+test_promoted_control_changes_reach_leaf_nodes (test_workflows.WorkflowContracts.test_promoted_control_changes_reach_leaf_nodes) ... ok
+test_reference_swap_is_rejected_after_valid_link_rebuild (test_workflows.WorkflowContracts.test_reference_swap_is_rejected_after_valid_link_rebuild) ... ok
 
 ----------------------------------------------------------------------
-Ran 36 tests in 1.337s
+Ran 52 tests in 7.289s
 
-OK
+OK (skipped=1)

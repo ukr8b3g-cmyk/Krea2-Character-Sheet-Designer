@@ -475,7 +475,7 @@ spec = importlib.util.spec_from_file_location('krea2_test_pack', root / '__init_
 module = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = module
 spec.loader.exec_module(module)
-assert set(module.NODE_CLASS_MAPPINGS) == {'Krea2CharacterSheetDesigner', 'Krea2LayoutReferenceSheetDesigner'}
+assert set(module.NODE_CLASS_MAPPINGS) == {'Krea2CharacterSheetDesigner', 'Krea2LayoutReferenceSheetDesigner', 'Krea2LayoutImageSheetDesigner'}
 assert set(module.NODE_DISPLAY_NAME_MAPPINGS) == set(module.NODE_CLASS_MAPPINGS)
 assert module.WEB_DIRECTORY == './web'
 from krea2_character_sheet.compiler import compile_state, DEFAULT_STATE_JSON
@@ -522,6 +522,7 @@ class PreviewEnvelopeContract(unittest.TestCase):
         self.assertEqual(captured, [
             ("/krea2_character_sheet_designer/preview", preview.preview),
             ("/krea2_character_sheet_designer/layout-reference/preview", preview.layout_preview),
+            ("/krea2_character_sheet_designer/layout-image/preview", preview.builtin_layout_preview),
         ])
 
     def test_route_registration_without_server_or_instance_is_safe(self):
