@@ -1,0 +1,1077 @@
+{
+  "id": "977f652d-59ed-5a12-a5bc-149f0e8a0f63",
+  "revision": 0,
+  "last_node_id": 202,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 55,
+      "type": "UNETLoader",
+      "pos": [
+        950,
+        80
+      ],
+      "size": [
+        480,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "UNETLoader",
+        "models": [
+          {
+            "name": "krea2_turbo_fp8_scaled.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
+            "directory": "diffusion_models"
+          }
+        ]
+      },
+      "widgets_values": [
+        "krea2_turbo_fp8_scaled.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 56,
+      "type": "CLIPLoader",
+      "pos": [
+        950,
+        230
+      ],
+      "size": [
+        480,
+        140
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4,
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "CLIPLoader",
+        "models": [
+          {
+            "name": "qwen3vl_4b_fp8_scaled.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
+            "directory": "text_encoders"
+          }
+        ]
+      },
+      "widgets_values": [
+        "qwen3vl_4b_fp8_scaled.safetensors",
+        "krea2",
+        "default"
+      ]
+    },
+    {
+      "id": 57,
+      "type": "VAELoader",
+      "pos": [
+        950,
+        400
+      ],
+      "size": [
+        480,
+        90
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            6,
+            7,
+            8,
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "VAELoader",
+        "models": [
+          {
+            "name": "qwen_image_vae.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 72,
+      "type": "LoadImage",
+      "pos": [
+        950,
+        570
+      ],
+      "size": [
+        520,
+        440
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SELECT_LAYOUT_EXAMPLE.png",
+        "image"
+      ],
+      "title": "Image 1: LAYOUT EXAMPLE / experimental"
+    },
+    {
+      "id": 90,
+      "type": "LoadImage",
+      "pos": [
+        950,
+        1130
+      ],
+      "size": [
+        520,
+        440
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            17,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "SELECT_CHARACTER_REFERENCE.png",
+        "image"
+      ],
+      "title": "Image 2: CHARACTER IDENTITY / required"
+    },
+    {
+      "id": 200,
+      "type": "Krea2LayoutReferenceSheetDesigner",
+      "pos": [
+        25,
+        80
+      ],
+      "size": [
+        870,
+        930
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            28
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            29
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2LayoutReferenceSheetDesigner"
+      },
+      "widgets_values": [
+        "{\"schema_version\":1,\"views\":[\"face_front\",\"face_left\",\"body_front\",\"body_left\",\"body_back\"],\"size\":{\"mode\":\"manual\",\"body_height\":672,\"manual_width\":1696,\"manual_height\":768}}"
+      ]
+    },
+    {
+      "id": 201,
+      "type": "Note",
+      "pos": [
+        25,
+        1070
+      ],
+      "size": [
+        870,
+        310
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "title": "Krea2 Layout Reference Sheet Designer (Experimental) / 使い方",
+      "widgets_values": [
+        "Image 1 = レイアウト例、Image 2 = 人物リファレンス。作者のscene-first / subject-second順序。\n2枚とも外観へ影響し、レイアウト専用分離は保証されません。人物が写る例から顔や服が混ざる場合は標準版を使用。\nUIマネキンは自動接続しません。選択したビューに合うレイアウト例を手動で選択。\nref_boost=4は最後の参照（人物）、ref_boost_a=1は最初の参照（レイアウト）。\n\nモデル・LoRA・参照画像の仮名を手元のファイルへ変更して実行。\n初期1696×768・5ビュー・10 steps / CFG 1 / euler / simple。\n同じlatentをKSamplerとtarget_latentへ接続。高解像度は自動縮小しません。まず約1MP〜2MP以下から確認。\nUIは7ビュー・8部位入力・Auto/Manual・日本語/英語対応。顔と全身のprofileは画面左向き。\n静的検証のみ。実ComfyUIの読込、Queue、GPU品質は未検証。\n専用ノード lbouaraba/comfyui-krea2edit と Identity Edit v1.2 LoRAが別途必要。Krea社公式のsheet workflowではありません。"
+      ]
+    },
+    {
+      "id": 202,
+      "type": "Note",
+      "pos": [
+        25,
+        1420
+      ],
+      "size": [
+        870,
+        220
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "title": "Upstream Apache-2.0 license / workflow provenance",
+      "widgets_values": [
+        "Workflow derived from lbouaraba/comfyui-krea2edit 86f886dac23013d88996e3a2e99093ba44d322fb. Modified 2026-10-05: Designer node, dynamic dimensions/prompt, role-labelled references, fixed seed, notes.\n\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n"
+      ]
+    },
+    {
+      "id": 71,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1270,
+        80
+      ],
+      "size": [
+        480,
+        120
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "SELECT_IDENTITY_EDIT_V1_2.safetensors",
+        1
+      ],
+      "title": "Required: Identity Edit v1.2 LoRA / strength 1.0"
+    },
+    {
+      "id": 73,
+      "type": "VAEEncode",
+      "pos": [
+        1520,
+        690
+      ],
+      "size": [
+        225,
+        8
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 11
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 82,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        1270,
+        290
+      ],
+      "size": [
+        270,
+        150
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 29
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            24,
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "EmptySD3LatentImage"
+      },
+      "widgets_values": [
+        1696,
+        768,
+        1
+      ],
+      "title": "Designer output dimensions / shared target latent"
+    },
+    {
+      "id": 84,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        1580,
+        80
+      ],
+      "size": [
+        310,
+        330
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 12
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 18
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode"
+      },
+      "widgets_values": [
+        "Create one clean static character reference sheet on a pure white canvas.\n\nImage 1 is ONLY a composition example: use its placement, framing, scale and spacing when they agree with the selected views below. Image 2 is the ONLY character identity and appearance reference.\n\nReplace every mannequin or person from Image 1 with the character from Image 2. Do not copy identity, face, hair, body design, clothes, colors, accessories, labels, borders or background from Image 1. The selected views and part directives below take priority over conflicting example content.\n\nShow exactly 5 separate depictions of the SAME character. Show only these selected views: front head-and-chest portrait; left-facing head-and-chest profile; full-body front view; left-facing full-body profile; full-body rear view.\n\nArrange all selected views side by side in ONE horizontal row, in the listed order.\n\nRead the following approximate positions as composition guidance, never as text or lines to draw. Percentages run from the top-left of the canvas.\n\n1. A straight front-facing head-and-chest portrait, with the complete hairstyle, head, neck, shoulders and upper chest visible. End at the chest; do not include the waist or legs. Region: left 3.2%, top 6.2%, width 19.8%, height 87.5%.\n\n2. A strict side-profile head-and-chest portrait, with the nose pointing toward the LEFT EDGE OF THE CANVAS. Show the complete hairstyle through the upper chest, without the waist or legs. Region: left 24.6%, top 6.2%, width 19.8%, height 87.5%.\n\n3. A straight front-facing full-body view. Face, shoulders, torso and feet face the viewer squarely, not in a three-quarter pose. Region: left 46.0%, top 6.2%, width 15.8%, height 87.5%.\n\n4. A strict side-profile full-body view, with the nose and toes pointing toward the LEFT EDGE OF THE CANVAS, in the same screen direction as the profile portrait when selected. Region: left 63.5%, top 6.2%, width 15.8%, height 87.5%.\n\n5. A straight full-body rear view. Head, torso and feet face directly away; show the back of the head without turning to reveal the face. Region: left 80.9%, top 6.2%, width 15.8%, height 87.5%.\n\nThe portraits have larger heads than the full-body figures. The portraits are chest-up, not additional full-body views.\n\nAll full-body figures stand neutrally at the same scale, arms relaxed, completely visible from the top of the hairstyle to the soles. Align the feet on one baseline. Keep clear white gaps and generous outer margins; do not overlap or crop any figure.\n\nPreserve the facial identity, distinctive features, hairstyle, hair color, proportions, clothing, fabric colors, footwear, visible accessories and rendering medium from Image 2, except for the explicitly requested part changes. Keep anatomical left-right asymmetries consistent across views. Continue unseen surfaces simply and conservatively.\n\nDo not add unrequested gloves, jewelry, props, accessories or costume elements absent from the character reference. Preserve reference gloves and footwear wherever visible unless explicitly changed by an applicable part directive.\n\nReplace the original environment with a flat uniform pure white background. Use neutral soft diffuse lighting and natural shading on the character only. No scenery, floor texture, grid, cast shadows, extra figures, unselected views, inset panels, captions, borders, dividers or watermarks. Lettering or patterns explicitly requested by a part directive belong only on that part; otherwise preserve reference details without inventing new lettering.\n",
+        768,
+        ""
+      ],
+      "title": "Positive / prompt supplied by Designer"
+    },
+    {
+      "id": 85,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        1580,
+        470
+      ],
+      "size": [
+        225,
+        8
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 13
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "Negative / blank / same reference order",
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode"
+      },
+      "widgets_values": [
+        "",
+        768,
+        ""
+      ]
+    },
+    {
+      "id": 92,
+      "type": "VAEEncode",
+      "pos": [
+        1520,
+        1260
+      ],
+      "size": [
+        228.75,
+        8
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 17
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 79,
+      "type": "Krea2EditModelPatch",
+      "pos": [
+        1920,
+        80
+      ],
+      "size": [
+        420,
+        350
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "source_latent",
+          "type": "LATENT",
+          "link": 15
+        },
+        {
+          "name": "source_latent_b",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 21
+        },
+        {
+          "name": "ref_boost_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 16
+        },
+        {
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 14
+        },
+        {
+          "name": "source_image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 20
+        },
+        {
+          "name": "target_latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditModelPatch"
+      },
+      "widgets_values": [
+        4,
+        1,
+        "fit"
+      ],
+      "title": "Identity Edit / identity boost 4 / fit"
+    },
+    {
+      "id": 53,
+      "type": "KSampler",
+      "pos": [
+        2400,
+        80
+      ],
+      "size": [
+        320,
+        560
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 22
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 23
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1088049369132323,
+        "fixed",
+        10,
+        1,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 54,
+      "type": "VAEDecode",
+      "pos": [
+        2780,
+        80
+      ],
+      "size": [
+        225,
+        8
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 25
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 29,
+      "type": "SaveImage",
+      "pos": [
+        3100,
+        80
+      ],
+      "size": [
+        680,
+        810
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.26.0",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "Krea2_Designer_LayoutRef"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      55,
+      0,
+      71,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      71,
+      0,
+      79,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      79,
+      0,
+      53,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      56,
+      0,
+      84,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      56,
+      0,
+      85,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      57,
+      0,
+      54,
+      1,
+      "VAE"
+    ],
+    [
+      7,
+      57,
+      0,
+      73,
+      1,
+      "VAE"
+    ],
+    [
+      8,
+      57,
+      0,
+      92,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      72,
+      0,
+      73,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      72,
+      0,
+      84,
+      1,
+      "IMAGE"
+    ],
+    [
+      13,
+      72,
+      0,
+      85,
+      1,
+      "IMAGE"
+    ],
+    [
+      14,
+      72,
+      0,
+      79,
+      5,
+      "IMAGE"
+    ],
+    [
+      15,
+      73,
+      0,
+      79,
+      1,
+      "LATENT"
+    ],
+    [
+      16,
+      57,
+      0,
+      79,
+      4,
+      "VAE"
+    ],
+    [
+      17,
+      90,
+      0,
+      92,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      90,
+      0,
+      84,
+      2,
+      "IMAGE"
+    ],
+    [
+      19,
+      90,
+      0,
+      85,
+      2,
+      "IMAGE"
+    ],
+    [
+      20,
+      90,
+      0,
+      79,
+      6,
+      "IMAGE"
+    ],
+    [
+      21,
+      92,
+      0,
+      79,
+      2,
+      "LATENT"
+    ],
+    [
+      22,
+      84,
+      0,
+      53,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      23,
+      85,
+      0,
+      53,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      24,
+      82,
+      0,
+      53,
+      3,
+      "LATENT"
+    ],
+    [
+      25,
+      53,
+      0,
+      54,
+      0,
+      "LATENT"
+    ],
+    [
+      26,
+      54,
+      0,
+      29,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      82,
+      0,
+      79,
+      7,
+      "LATENT"
+    ],
+    [
+      28,
+      200,
+      0,
+      84,
+      3,
+      "STRING"
+    ],
+    [
+      29,
+      200,
+      1,
+      82,
+      0,
+      "INT"
+    ],
+    [
+      30,
+      200,
+      2,
+      82,
+      1,
+      "INT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.65,
+      "offset": [
+        70,
+        30
+      ]
+    },
+    "krea2_designer_provenance": {
+      "source_commit": "86f886dac23013d88996e3a2e99093ba44d322fb",
+      "source_workflow_blob": "a707d8d27cb8504f8a63ab38babe3855ac797c59",
+      "identity_edit_version_checked": "1.2.5",
+      "variant": "layout_reference_experimental",
+      "layout_reference_isolation": "prompt_guidance_only",
+      "validation": "static only; real ComfyUI/GPU not run"
+    }
+  },
+  "version": 0.4
+}

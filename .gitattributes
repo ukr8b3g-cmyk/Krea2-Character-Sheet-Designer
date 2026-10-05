@@ -1,0 +1,3 @@
+# Preserve byte-verified upstream material, including its original whitespace.
+krea2_character_sheet/common/*.py whitespace=-blank-at-eof
+tests/upstream/** -whitespace

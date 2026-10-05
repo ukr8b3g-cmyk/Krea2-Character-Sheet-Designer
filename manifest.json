@@ -1,0 +1,362 @@
+{
+  "package": "Krea2 Character Sheet Designer",
+  "version": "0.1.0",
+  "date_utc": "2026-10-05",
+  "sources": {
+    "qwen": "604ec0c6ea4046a3460e2c662d41f564870c15d8",
+    "h3": "bf792c652a9f50e895409e49fce667fef0f73c25",
+    "identity_edit": "86f886dac23013d88996e3a2e99093ba44d322fb",
+    "comfyui_schema": "5c460d8172fe30761ff67c0df3d5643bb74e0d70"
+  },
+  "verification_scope": "CPU / JavaScript / jsdom / HTTP / static workflow; no real ComfyUI or GPU",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "size": 168,
+      "sha256": "fb2579e858debb9e06092593b3401d5f5b038d46f035c28600d46bd0fa80a948",
+      "git_blob_sha": "015c6ed22db6b69b351dd444a48bd24b41899516"
+    },
+    {
+      "path": ".gitignore",
+      "size": 69,
+      "sha256": "a7db7fd763af3ed9b4e0e022c7fa17639ec6b1ebc14a36379d4b3d07ea572c3a",
+      "git_blob_sha": "92f4c9cbf9a58695db47a169851cfc832b53b455"
+    },
+    {
+      "path": "NOTICE.md",
+      "size": 2523,
+      "sha256": "bd74739c0ab6a7cbb11cca3f377ec22d4b8fe956a4c0a13a7ddcbbc7aaafcd1c",
+      "git_blob_sha": "64d5da952fab89792f07a05f5697cd049aed22d7"
+    },
+    {
+      "path": "README.md",
+      "size": 9997,
+      "sha256": "c6e65eff2e6f71dbd0d2c16f5b2e328a07c991e80ec5efa380ca0606a1c9fc4d",
+      "git_blob_sha": "b86c9493cd92fc1a6f65d6c9b81b3ca60049f2b5"
+    },
+    {
+      "path": "__init__.py",
+      "size": 736,
+      "sha256": "c6c3ba08c68d26bab3cbc33f9341dcad0205cdd744c2ff5292218a8eb19d6ff8",
+      "git_blob_sha": "99a363aacb847b61b430ba6d48a55b8ca442f7fd"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "size": 4286,
+      "sha256": "db7550d1a3daf108b621f917036f39b23fbceb308234e2ad43ee0efbfbeb2e7d",
+      "git_blob_sha": "4db826b9aadb6fbd35a703a69ac9b113b8b8ec37"
+    },
+    {
+      "path": "krea2_character_sheet/__init__.py",
+      "size": 59,
+      "sha256": "70cce3b1b175ab7c58544c6378ce9c6727a161663839b4182dcaa31487c0c4c3",
+      "git_blob_sha": "1143b38cb24237c91b7b7238a50d9a2346518ef6"
+    },
+    {
+      "path": "krea2_character_sheet/common/__init__.py",
+      "size": 67,
+      "sha256": "67ea61d122a3e62a21352e511ae9ce4ec1fbbefd0cf1e58fbab3269b58f6e66b",
+      "git_blob_sha": "829307c60a657871441cdfff67db0efc3b508e4e"
+    },
+    {
+      "path": "krea2_character_sheet/common/geometry.py",
+      "size": 4411,
+      "sha256": "6b557ffbdc3d5376b8736285ae732e4d39598fa63f2fa64487bbb7ed4edea96e",
+      "git_blob_sha": "eb7ca357f9bfe5fbbf530eeabc75e4431de8ef73"
+    },
+    {
+      "path": "krea2_character_sheet/common/layout_serialization.py",
+      "size": 982,
+      "sha256": "44a1053ec8b11dc35b397e74ce635ee9b9aaaa756b830e69be31c198d64e7246",
+      "git_blob_sha": "7250eaf268941c7b4cb389063c3620ad23a1fad1"
+    },
+    {
+      "path": "krea2_character_sheet/common/state.py",
+      "size": 10929,
+      "sha256": "f8f46a59d4cbf9517bfe9199a77c9961026056811f30bbc57af9cc9df48bb173",
+      "git_blob_sha": "90fc8f6b89ce076c9ea8e8fc703755fd807c0283"
+    },
+    {
+      "path": "krea2_character_sheet/compiler.py",
+      "size": 9087,
+      "sha256": "b6d03076e046c042cef8166f3c6bd7c4a95fa3c49fc75b256c7021df5c6b0435",
+      "git_blob_sha": "c3a66abaf2b111e4be08db8aed6b27f969b66b6f"
+    },
+    {
+      "path": "krea2_character_sheet/node.py",
+      "size": 2533,
+      "sha256": "d8c2b46895cd3beae8581f1e770f84dfbefa4635cf81d78c96f48ecf54daa9c1",
+      "git_blob_sha": "fbc751ce42a2dbe5fd066810d5ebd78160ac9709"
+    },
+    {
+      "path": "krea2_character_sheet/preview.py",
+      "size": 3431,
+      "sha256": "bb223889ed69b086c4014768c344d9e4cc98c8cd6470e7fbc478f5ccf4f5c251",
+      "git_blob_sha": "6ab380d8607ce8410606835e22487cf994fdc01a"
+    },
+    {
+      "path": "package.json",
+      "size": 196,
+      "sha256": "5cfe69937d257d6391c270d40aca09a3b7a6569e39d7286f8f235015274b784f",
+      "git_blob_sha": "b30efff81a9ccca6baeff3263547e9edd293f17c"
+    },
+    {
+      "path": "pyproject.toml",
+      "size": 425,
+      "sha256": "308a10431e96e3ae5f405e5067351713b1a47f861c5f0ff5c283a5a0e8c51f52",
+      "git_blob_sha": "b880ceef34d3ac179b7cc673bc99c5e7b3a29d1d"
+    },
+    {
+      "path": "tests/__init__.py",
+      "size": 71,
+      "sha256": "07fd0d0568d2c63d871b8cd8097abb2a7d0661220c9c2d3f41a0e09bb063729a",
+      "git_blob_sha": "18273814824dd1a9d5b91b44d8242b1fdf92c6c7"
+    },
+    {
+      "path": "tests/browser/harness.js",
+      "size": 5217,
+      "sha256": "7e1bfee568bf723681f685de0fe06ac48cfbc8ee4976a7509d47a175b8589bdf",
+      "git_blob_sha": "4e9c6f56f651ed9b35ce98604f6d551dd8714fb6"
+    },
+    {
+      "path": "tests/browser/index.html",
+      "size": 897,
+      "sha256": "bb1f9cfd84b382c1e789d8cb5198496766798f06af4e241c5fe3e7f9dd1926a3",
+      "git_blob_sha": "4aee7b7ed726cefccc188632c8f8744b0889cedb"
+    },
+    {
+      "path": "tests/browser/offline_bundle.py",
+      "size": 3389,
+      "sha256": "0491b5ff61da184f757f0e79c8ea28f0d0fbe1723582c285c0631500b24b372d",
+      "git_blob_sha": "361613d929c3c52b2b6955f56ad85bb8e6c5773f"
+    },
+    {
+      "path": "tests/browser/verify_browser.py",
+      "size": 8118,
+      "sha256": "e07c4c3871c596849b63071a24a8492a1d2b986c7dd15d1960e4eac8250dcba7",
+      "git_blob_sha": "aa47f325622ed14945797c748e4bd1605fa613b9"
+    },
+    {
+      "path": "tests/dom/krea2_ui.test.js",
+      "size": 33571,
+      "sha256": "3712bd83efdcd1d3316ee80c1d2d40bd47efa72eb10342525d19789626e899c2",
+      "git_blob_sha": "fb303cece65c2e22ed98989b80319bd6fbfd0fb6"
+    },
+    {
+      "path": "tests/fixtures/five_view_state.json",
+      "size": 194,
+      "sha256": "11e5acdc98c86c63d7c26e79d86c308b0c540ad106732d683c773887980a4666",
+      "git_blob_sha": "43e50d52cf62f38b459c06098df1a0747fb331e6"
+    },
+    {
+      "path": "tests/fixtures/golden_states.json",
+      "size": 2741,
+      "sha256": "defd6d4ef604ad174c75145ccd9af428ccf9a1c3dc48714f11f327fb4c556392",
+      "git_blob_sha": "8bb13ed34daf2b9587f95266629a0ed43efb27c6"
+    },
+    {
+      "path": "tests/fixtures/state_cases.json",
+      "size": 45301,
+      "sha256": "cd09bfa867cad3fbfa6e54bdff76eb1d2deb1e3ab2fc0446ad3ab1d8206a9908",
+      "git_blob_sha": "45edb28511c243a9853e66c5ecc779985049e1a8"
+    },
+    {
+      "path": "tests/js/artwork.test.js",
+      "size": 3818,
+      "sha256": "f8714bdda2d1134346700747d34d158e9275fa848720e41da604224028a039ff",
+      "git_blob_sha": "c0191ebdbbc24ff8e7b497206781ff8156ed9ed0"
+    },
+    {
+      "path": "tests/js/state.test.js",
+      "size": 7092,
+      "sha256": "8d643d766000a9f1263a1cb3f3ab7a19c60e16b3e08968f6c66e60af417f547a",
+      "git_blob_sha": "17ca8be9b625c7e97ec2f42d08dbcf9c6b995e62"
+    },
+    {
+      "path": "tests/test_contract.py",
+      "size": 35974,
+      "sha256": "170a5d86047ba6df038929e0ddcca0cf2e823b7ea39e5d90d5c87c70ba6bbf94",
+      "git_blob_sha": "f3dbf7690ff2ccd5831fdd55fd7faecee5f4c829"
+    },
+    {
+      "path": "tests/test_workflows.py",
+      "size": 260,
+      "sha256": "31d49567d1bca818e79fc2ef2e14f6ea7cf9f3729dd5bdf3f13359eb9d41a6d4",
+      "git_blob_sha": "3dcaf5dd011fac553cb896845d28debf48e59c94"
+    },
+    {
+      "path": "tests/upstream/__init__.py",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "tests/upstream/h3_compiler.py",
+      "size": 30625,
+      "sha256": "cde6efca8e0ab82bb678fb0c642c763af3a1ed6b8d19a01c9220906d753690d0",
+      "git_blob_sha": "e74e778131a58d564ff55ced4ebd75df1a129111"
+    },
+    {
+      "path": "tests/upstream/web/artwork.js",
+      "size": 286,
+      "sha256": "a7c49e6ccd2c66afd579dd80a9b57dfd1eb41938c3105c8aa4d72053667e6eca",
+      "git_blob_sha": "57e168a70c6fa241d8eb01990dee44f753201b36"
+    },
+    {
+      "path": "tests/upstream/web/avatar.js",
+      "size": 15408,
+      "sha256": "abc3c1a3b2d47d28326eee41f3a9803c6fc7a4f3f4e2e0020504de2383fa4b3a",
+      "git_blob_sha": "24b8a7ea7bf7dc170fe5a973ec0ba0d4feb9d9e8"
+    },
+    {
+      "path": "tests/upstream/web/integration.js",
+      "size": 12025,
+      "sha256": "90337ca7cbf59d3f660b73b131b0cd33d4ceaccdf43948f436fc5f0d3749f225",
+      "git_blob_sha": "417573ced31952bf538d66d93be081fc865b5abe"
+    },
+    {
+      "path": "tests/upstream/web/state.js",
+      "size": 14444,
+      "sha256": "9c28c9dc68fe4fa044ae422d45ce7d436b676605d027251a9bcc2ef8d84fcca5",
+      "git_blob_sha": "d184577e34473a0180cccd20cdf1078d01366357"
+    },
+    {
+      "path": "tests/upstream/web/style.css",
+      "size": 10261,
+      "sha256": "02b0fd8cee953ffc0cade7d29879e9c9971865c95e10ce8fa124689dd646bac6",
+      "git_blob_sha": "1b5a07735a38a900bddd664b26db7faead6e2128"
+    },
+    {
+      "path": "tests/upstream/web/ui.js",
+      "size": 29226,
+      "sha256": "d954bc0a0aa1d60ef3709ba4c13c9b1d485bacbf1faf8cf329f468c1e87113e8",
+      "git_blob_sha": "3182604a3a587f605e6e39ad8362d77487400e12"
+    },
+    {
+      "path": "tools/build_workflows.py",
+      "size": 8023,
+      "sha256": "08cb4f0da041e213cf367aabe8b319f8574c9cc059e81cf60f423b23d91718f9",
+      "git_blob_sha": "28033c45d9d6b0ec654e14ab2945f266e16e9182"
+    },
+    {
+      "path": "tools/make_manifest.py",
+      "size": 1145,
+      "sha256": "dce12348411e181b4c77327dcf59e4eee7308650c968870d41ca263556240d29",
+      "git_blob_sha": "7a166da30bef1a269f05ee383c31eeac54b9468a"
+    },
+    {
+      "path": "tools/upstream/LICENSE-IdentityEdit",
+      "size": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "tools/upstream/krea2_identity_edit.json",
+      "size": 24180,
+      "sha256": "08bd8f0f966c6eec10b7203f432aefdeb3cf9c2272f0b130e547384d93db41a4",
+      "git_blob_sha": "a707d8d27cb8504f8a63ab38babe3855ac797c59"
+    },
+    {
+      "path": "tools/validate_workflows.py",
+      "size": 4538,
+      "sha256": "62c6d9a78eb2d0b289fd42e54f4067f54553da29cd71645f9f8c5f3159322128",
+      "git_blob_sha": "a7a4d1b9aa3da1ad62d058d142bc4a263e04b251"
+    },
+    {
+      "path": "verification/dom_tests.log",
+      "size": 4740,
+      "sha256": "f4313bd76dc907a45207b6f2d5777e945d4b5eae636a5be39a9ee3308176925f",
+      "git_blob_sha": "bda8669e6886a44ca00248833be90b9713fadedb"
+    },
+    {
+      "path": "verification/javascript_tests.log",
+      "size": 5318,
+      "sha256": "ba5cac5a48f2af8b6e5e2dffa17dd6bf1fde6ca3dcd691ac3fdb00caa98cd09e",
+      "git_blob_sha": "36ce9769b535285fd0d72eb9e544eedbcfed89bf"
+    },
+    {
+      "path": "verification/python_tests.log",
+      "size": 6382,
+      "sha256": "cc08b1fd0309676e87571ca44a81e324a4318aa6fe7ae2dbb25d4c9d23ae29a0",
+      "git_blob_sha": "2f1541942aa5e1100c4e2fd5dd2a686f0fb86680"
+    },
+    {
+      "path": "verification/workflow_results.json",
+      "size": 425,
+      "sha256": "edbd2fde162b7ee45f2f85e75da9e3d824f12c994c88c9822d58ba8ffcafa0a7",
+      "git_blob_sha": "8f7995299fe1349500836691a3ccdb080b4c45b1"
+    },
+    {
+      "path": "web/artwork.js",
+      "size": 2755,
+      "sha256": "6d3ef293c14ed65c7fc2531cb10fd759dbd51c7564e5b6e447095610db7bcdff",
+      "git_blob_sha": "f5072e4e5af8776f3dfa44774452a58f51a9349c"
+    },
+    {
+      "path": "web/artwork_config.js",
+      "size": 104,
+      "sha256": "242f1dfaaf6f8b1308851d3c3a0760741df25dfa5627c060ffe21988f1c8e5ed",
+      "git_blob_sha": "e45471ec374db3ae24f780a9d300e9a1056de818"
+    },
+    {
+      "path": "web/assets/mannequin-atlas.png",
+      "size": 823743,
+      "sha256": "7213405d101a6ccc0152304680ab5a1b4f17ba456086f3469b41be1319b2b8f6",
+      "git_blob_sha": "35dd5fabbe138b7b181b89d55432a6e53d0e9c34"
+    },
+    {
+      "path": "web/avatar.js",
+      "size": 15420,
+      "sha256": "7ae1a468dcb3560a6009a8bacc6edb6ae718fec6a56015f3600f326660e6d16f",
+      "git_blob_sha": "d92f36bbf7ce7855b169a58df05d45e83a40922e"
+    },
+    {
+      "path": "web/integration.js",
+      "size": 12092,
+      "sha256": "fc2fc81e5ebce4c1a33a8771dcf49f67b4d6c5a451ee2302309306e44a2cf2f5",
+      "git_blob_sha": "e4ae7c253b4f718604f8869c3ef4fa3be5ede0b7"
+    },
+    {
+      "path": "web/krea2_character_sheet_designer.js",
+      "size": 184,
+      "sha256": "5c4ef35ee47f31a6ccee46c416ef6d9a0d05d692ad910bd916f2dfa8a983a370",
+      "git_blob_sha": "7105910f2f50bb951c79e0f66bd208600c9346d4"
+    },
+    {
+      "path": "web/profile.js",
+      "size": 780,
+      "sha256": "f489b7a42f5cb1a2cdc4d78dec88b6ebad9d2146b52c8e793cb7d4b2658e6ee9",
+      "git_blob_sha": "444f664a7f118b6e908eae2b27222b579d4a0dd5"
+    },
+    {
+      "path": "web/state.js",
+      "size": 14444,
+      "sha256": "9c28c9dc68fe4fa044ae422d45ce7d436b676605d027251a9bcc2ef8d84fcca5",
+      "git_blob_sha": "d184577e34473a0180cccd20cdf1078d01366357"
+    },
+    {
+      "path": "web/style.css",
+      "size": 11073,
+      "sha256": "8bba864a7c95a60e1409191969981a156ba218a8f2674f79259d0b33d4f0b5d8",
+      "git_blob_sha": "1832236fd9988dd952f0c131dbef217167999566"
+    },
+    {
+      "path": "web/ui.js",
+      "size": 29522,
+      "sha256": "389038507fbbf0d113e9dcba86eafd9630451340dbc393e1201fa2a27693d840",
+      "git_blob_sha": "8b0f3f71dc35361d75d611a65890c4e84862a62d"
+    },
+    {
+      "path": "workflows/Krea2_Character_Sheet_Designer.json",
+      "size": 32075,
+      "sha256": "1d36950416ebbaa9f6db677209a1ee1c4474ab8fb6643830664a3cbe94606a12",
+      "git_blob_sha": "eb41eafe6b20570764000e6455054b742705de36"
+    },
+    {
+      "path": "workflows/Krea2_Layout_Reference_Designer_Experimental.json",
+      "size": 34852,
+      "sha256": "e0923323b0af6efd99d1c798e09b326f291a3a8e154611ba83d5b193823e19bb",
+      "git_blob_sha": "c37c7d1304d85ecff835060c518fa152514c5a76"
+    }
+  ]
+}

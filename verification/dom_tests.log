@@ -1,0 +1,42 @@
+✔ Krea2CharacterSheetDesigner: preserves canonical widget identity, position, value descriptor and the only saved designer input (138.708744ms)
+✔ Krea2CharacterSheetDesigner: all view buttons and presets immediately save; last view stays selected (65.823302ms)
+✔ Krea2CharacterSheetDesigner: latest rapid preview wins even when earlier aborted requests return later (54.126744ms)
+✔ Krea2CharacterSheetDesigner: Japanese and English change labels without rewriting saved state or numeric drafts (31.089083ms)
+✔ Krea2CharacterSheetDesigner: all eight part fields save independently with literal text, multiline and IME-safe Enter (82.721975ms)
+✔ Krea2CharacterSheetDesigner: invalid part drafts remain visible without changing canonical state and restore clears them (27.46062ms)
+✔ Krea2CharacterSheetDesigner: Auto/Manual dimensions and numeric drafts commit once, reject invalid input, and cancel cleanly (48.74007ms)
+✔ Krea2CharacterSheetDesigner: Undo/Redo source restoration retains exact JSON and clears stale drafts without creating history (28.542853ms)
+✔ Krea2CharacterSheetDesigner: official widget setter retains receiver/return and external source is read before a UI action (22.003281ms)
+✔ Krea2CharacterSheetDesigner: server and malformed-preview failures retain saved state and recover via Retry (22.130903ms)
+✔ Krea2CharacterSheetDesigner: malformed raw JSON is preserved until explicit valid repair; schema 3 stays rejected (23.221017ms)
+✔ Krea2CharacterSheetDesigner: a stale successful preview cannot enable Manual after a newer network failure (29.127314ms)
+✔ Krea2CharacterSheetDesigner: accessible tabs and part controls support keyboard navigation without saved-state changes (20.001103ms)
+✔ Krea2CharacterSheetDesigner: repeated remove/re-add disposes requests, observers, locale and DOM handlers without duplication (54.640477ms)
+✔ Krea2LayoutReferenceSheetDesigner: preserves canonical widget identity, position, value descriptor and the only saved designer input (12.372498ms)
+✔ Krea2LayoutReferenceSheetDesigner: all view buttons and presets immediately save; last view stays selected (35.879797ms)
+✔ Krea2LayoutReferenceSheetDesigner: latest rapid preview wins even when earlier aborted requests return later (23.452166ms)
+✔ Krea2LayoutReferenceSheetDesigner: Japanese and English change labels without rewriting saved state or numeric drafts (27.175301ms)
+✔ Krea2LayoutReferenceSheetDesigner: all eight part fields save independently with literal text, multiline and IME-safe Enter (88.393848ms)
+✔ Krea2LayoutReferenceSheetDesigner: invalid part drafts remain visible without changing canonical state and restore clears them (23.628031ms)
+✔ Krea2LayoutReferenceSheetDesigner: Auto/Manual dimensions and numeric drafts commit once, reject invalid input, and cancel cleanly (34.556431ms)
+✔ Krea2LayoutReferenceSheetDesigner: Undo/Redo source restoration retains exact JSON and clears stale drafts without creating history (24.297461ms)
+✔ Krea2LayoutReferenceSheetDesigner: official widget setter retains receiver/return and external source is read before a UI action (15.727717ms)
+✔ Krea2LayoutReferenceSheetDesigner: server and malformed-preview failures retain saved state and recover via Retry (25.865595ms)
+✔ Krea2LayoutReferenceSheetDesigner: malformed raw JSON is preserved until explicit valid repair; schema 3 stays rejected (19.683152ms)
+✔ Krea2LayoutReferenceSheetDesigner: a stale successful preview cannot enable Manual after a newer network failure (23.40153ms)
+✔ Krea2LayoutReferenceSheetDesigner: accessible tabs and part controls support keyboard navigation without saved-state changes (15.485092ms)
+✔ Krea2LayoutReferenceSheetDesigner: repeated remove/re-add disposes requests, observers, locale and DOM handlers without duplication (36.276735ms)
+[Krea2 Character Sheet Designer] Graphical designer unavailable. Edit the normal state_json string; Python compilation is still available. unsupported DOM registration
+[Krea2 Character Sheet Designer] Graphical designer unavailable. Edit the normal state_json string; Python compilation is still available. unsupported DOM registration
+✔ both node profiles have independent state, DOM, SVG IDs, pending requests and disposal (32.399669ms)
+✔ type-only and comfyClass-only layout identities are recognized without image sourcing or role state (15.8886ms)
+✔ duplicate instances of either profile never share part drafts, saved bytes or SVG IDs (59.021064ms)
+✔ failed partial DOM installation rolls back widgets and hooks while preserving raw fallback input (14.660398ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1697.624402

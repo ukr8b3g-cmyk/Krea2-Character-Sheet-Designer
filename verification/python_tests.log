@@ -1,0 +1,45 @@
+test_core_max_resolution_is_read_at_call_time (test_contract.NodeContract.test_core_max_resolution_is_read_at_call_time) ... ok
+test_nodes_and_preview_share_compiler_contract_for_every_fixture (test_contract.NodeContract.test_nodes_and_preview_share_compiler_contract_for_every_fixture) ... ok
+test_package_registers_both_nodes_without_torch_or_comfyui (test_contract.NodeContract.test_package_registers_both_nodes_without_torch_or_comfyui) ... ok
+test_two_nodes_expose_exact_three_outputs_and_one_state_input (test_contract.NodeContract.test_two_nodes_expose_exact_three_outputs_and_one_state_input) ... ok
+test_envelope_is_exactly_one_string_field_and_strict_json (test_contract.PreviewEnvelopeContract.test_envelope_is_exactly_one_string_field_and_strict_json) ... ok
+test_route_registration_is_independent_and_idempotent (test_contract.PreviewEnvelopeContract.test_route_registration_is_independent_and_idempotent) ... ok
+test_route_registration_without_server_or_instance_is_safe (test_contract.PreviewEnvelopeContract.test_route_registration_without_server_or_instance_is_safe) ... ok
+test_chunked_payload_limit_is_enforced_without_content_length (test_contract.PreviewHTTPContract.test_chunked_payload_limit_is_enforced_without_content_length) ... ok
+test_chunked_unknown_length_success_in_both_modes (test_contract.PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes) ... Executing <Task finished name='Task-8' coro=<PreviewHTTPContract.test_chunked_unknown_length_success_in_both_modes() done, defined at ./tests/test_contract.py:578> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.126 seconds
+ok
+test_http_respects_live_core_max_resolution (test_contract.PreviewHTTPContract.test_http_respects_live_core_max_resolution) ... ok
+test_http_validation_statuses_and_codes (test_contract.PreviewHTTPContract.test_http_validation_statuses_and_codes) ... Executing <Task finished name='Task-18' coro=<PreviewHTTPContract.test_http_validation_statuses_and_codes() done, defined at ./tests/test_contract.py:605> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.379 seconds
+ok
+test_internal_error_is_sanitized_and_never_returns_user_prompt (test_contract.PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt) ... Executing <Task finished name='Task-23' coro=<PreviewHTTPContract.test_internal_error_is_sanitized_and_never_returns_user_prompt() done, defined at ./tests/test_contract.py:624> result=None created at <python-runtime>/lib/python3.12/asyncio/runners.py:100> took 0.145 seconds
+ok
+test_oversized_declared_length_is_rejected_before_read (test_contract.PreviewHTTPContract.test_oversized_declared_length_is_rejected_before_read) ... ok
+test_real_aiohttp_routes_return_matching_node_outputs (test_contract.PreviewHTTPContract.test_real_aiohttp_routes_return_matching_node_outputs) ... ok
+test_wrong_content_type_is_rejected_before_read (test_contract.PreviewHTTPContract.test_wrong_content_type_is_rejected_before_read) ... ok
+test_all_selected_depictions_and_only_selected_panel_regions (test_contract.PromptContract.test_all_selected_depictions_and_only_selected_panel_regions) ... ok
+test_details_preserve_complete_hands_and_footwear (test_contract.PromptContract.test_details_preserve_complete_hands_and_footwear) ... ok
+test_every_part_visibility_scope_is_independent_of_freeform_text (test_contract.PromptContract.test_every_part_visibility_scope_is_independent_of_freeform_text) ... ok
+test_full_bodies_portraits_and_white_canvas_have_required_framing (test_contract.PromptContract.test_full_bodies_portraits_and_white_canvas_have_required_framing) ... ok
+test_hands_and_footwear_stay_on_body_when_detail_panels_are_off (test_contract.PromptContract.test_hands_and_footwear_stay_on_body_when_detail_panels_are_off) ... ok
+test_literal_part_text_appears_once_unchanged_in_each_reference_mode (test_contract.PromptContract.test_literal_part_text_appears_once_unchanged_in_each_reference_mode) ... ok
+test_no_h3_video_or_qwen_json_prompt_template_leaks (test_contract.PromptContract.test_no_h3_video_or_qwen_json_prompt_template_leaks) ... ok
+test_part_changes_never_change_geometry (test_contract.PromptContract.test_part_changes_never_change_geometry) ... ok
+test_profile_portrait_and_body_both_face_screen_left (test_contract.PromptContract.test_profile_portrait_and_body_both_face_screen_left) ... ok
+test_rear_clothing_never_applies_to_front_or_portrait_panels (test_contract.PromptContract.test_rear_clothing_never_applies_to_front_or_portrait_panels) ... ok
+test_reference_roles_are_explicit_and_cannot_enter_saved_schema (test_contract.PromptContract.test_reference_roles_are_explicit_and_cannot_enter_saved_schema) ... ok
+test_additional_strict_json_failures (test_contract.StateGeometryContract.test_additional_strict_json_failures) ... ok
+test_all_127_view_sets_modes_schemas_and_reference_roles_match_upstream (test_contract.StateGeometryContract.test_all_127_view_sets_modes_schemas_and_reference_roles_match_upstream)
+508 state/geometry cases, checked in both modes (1,016 compiles). ... ok
+test_experimental_metadata_boundary (test_contract.StateGeometryContract.test_experimental_metadata_boundary) ... ok
+test_five_view_geometry_is_stable_and_horizontal (test_contract.StateGeometryContract.test_five_view_geometry_is_stable_and_horizontal) ... ok
+test_manual_dimensions_do_not_change_with_view_selection (test_contract.StateGeometryContract.test_manual_dimensions_do_not_change_with_view_selection) ... ok
+test_runtime_limits_cover_inactive_fields_and_computed_auto_size (test_contract.StateGeometryContract.test_runtime_limits_cover_inactive_fields_and_computed_auto_size) ... ok
+test_strict_validation_fixture_acceptance_and_error_codes (test_contract.StateGeometryContract.test_strict_validation_fixture_acceptance_and_error_codes) ... ok
+test_utf16_limit_and_literal_whitespace_preservation (test_contract.StateGeometryContract.test_utf16_limit_and_literal_whitespace_preservation) ... ok
+test_v2_requires_exact_parts_schema_and_v1_never_migrates (test_contract.StateGeometryContract.test_v2_requires_exact_parts_schema_and_v1_never_migrates) ... ok
+test_both_graphs (test_workflows.WorkflowContracts.test_both_graphs) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 1.337s
+
+OK

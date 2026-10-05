@@ -1,0 +1,148 @@
+.krea2-designer {
+  --krea2-bg: #161c23;
+  --krea2-panel: #202934;
+  --krea2-text: #edf3f8;
+  --krea2-muted: #bdcbd9;
+  --krea2-accent: #85e7d6;
+  --comfy-widget-min-height: 760px;
+  --comfy-widget-height: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 760px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: linear-gradient(160deg, #1c2430, #141b22 60%);
+  color: var(--krea2-text);
+  color-scheme: dark;
+  font: 18px/1.4 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  border: 1px solid #4c5e70;
+  border-radius: 11px;
+  overflow: auto;
+  container-type: inline-size;
+  scrollbar-width: thin;
+}
+.krea2-designer * { box-sizing: border-box; }
+.krea2-designer > :not(.krea2-stage):not(.krea2-part-panel) { flex-shrink: 0; }
+.krea2-designer [hidden] { display: none !important; }
+.krea2-designer button, .krea2-designer input, .krea2-designer select, .krea2-designer textarea { font: inherit; color: inherit; }
+.krea2-designer button { cursor: pointer; }
+.krea2-designer button:disabled, .krea2-designer select:disabled, .krea2-designer input:disabled { cursor: default; opacity: .72; }
+.krea2-designer :focus-visible { outline: 2px solid #85e7d6; outline-offset: 2px; }
+.krea2-intro { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 17px; min-height: 24px; }
+.krea2-count { white-space: nowrap; color: var(--krea2-accent); font-size: 15px; font-variant-numeric: tabular-nums; }
+.krea2-cards { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.krea2-card { position: relative; min-width: 0; padding: 5px 3px 7px; background: #242d38; border: 1px solid #607183; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: border-color .15s, background .15s; }
+.krea2-card[aria-pressed=true] { border-color: #85e7d6; background: linear-gradient(150deg, #28443e, #202f34); box-shadow: inset 0 0 0 1px #57cdb71f; }
+.krea2-card:hover:not(:disabled) { border-color: #a0e9dc; }
+.krea2-card-figure { height: 80px; width: 100%; display: block; filter: saturate(.2); opacity: .75; }
+.krea2-card[aria-pressed=true] .krea2-card-figure { filter: none; opacity: 1; }
+.krea2-card-figure svg, .krea2-card-figure img { width: 100%; height: 100%; display: block; }
+.krea2-card-label { font-size: 16px; line-height: 22px; text-align: center; overflow-wrap: anywhere; }
+.krea2-check { position: absolute; right: 6px; top: 6px; font-size: 13px; width: 19px; height: 19px; display: grid; place-items: center; border: 1px solid #7b8da0; border-radius: 50%; color: transparent; background: #202a34; }
+.krea2-card[aria-pressed=true] .krea2-check { background: #85e7d6; border-color: #85e7d6; color: #15362f; }
+.krea2-preset-row { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+.krea2-preset-row label { color: var(--krea2-muted); font-size: 16px; }
+.krea2-select { appearance: auto; flex: 1; width: 100%; min-width: 0; height: 40px; background: #26313d; border: 1px solid #687e92; border-radius: 6px; padding: 6px 10px; }
+.krea2-select option { color: var(--krea2-text); background: #26313d; }
+.krea2-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px; border: 1px solid #4b6072; border-radius: 8px; background: #1c2630; }
+.krea2-mode-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.krea2-field-title { color: var(--krea2-muted); font-size: 16px; }
+.krea2-mode-group { display: flex; border: 1px solid #687e92; border-radius: 6px; overflow: hidden; }
+.krea2-mode { min-height: 38px; background: #26313e; border: 0; padding: 6px 12px; font-size: 17px !important; }
+.krea2-mode[aria-pressed=true] { background: #486961; color: #f0fff9; }
+.krea2-number-row { display: flex; align-items: flex-start; flex: 1; gap: 10px; min-width: 0; }
+.krea2-number-field { flex: 1; min-width: 110px; }
+.krea2-number-field label { display: block; font-size: 16px; color: var(--krea2-muted); margin-bottom: 4px; white-space: nowrap; }
+.krea2-input-line { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.krea2-input-line input { width: 100%; min-width: 0; height: 40px; padding: 6px 10px; background: #101a23; border: 1px solid #687e92; border-radius: 6px; font-variant-numeric: tabular-nums; }
+.krea2-height-choices { flex: none; font-variant-numeric: tabular-nums; }
+.krea2-draft-note { display: block; font-size: 14px; color: #f2d39f; line-height: 1.4; margin-top: 5px; }
+.krea2-draft-note:empty { display: none; }
+.krea2-has-draft input { border-color: #e8ca95; }
+.krea2-mode-hint { flex-basis: 100%; font-size: 14px; color: var(--krea2-muted); }
+.krea2-link-button { background: transparent; border: 0; padding: 6px 0; color: var(--krea2-accent) !important; font-size: 16px !important; }
+.krea2-metrics { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-height: 30px; padding: 0 1px; }
+.krea2-dimensions { font-size: 24px; font-weight: 650; letter-spacing: .2px; font-variant-numeric: tabular-nums; }
+.krea2-pixels { font-size: 15px; color: var(--krea2-muted); flex: 1; white-space: nowrap; }
+.krea2-experimental { font-size: 14px; background: #4b3e2c; border: 1px solid #b59561; color: #f4d7a6; padding: 3px 8px; border-radius: 5px; }
+.krea2-resolution-note { font-size: 14px; color: #d8c6a8; line-height: 1.4; }
+.krea2-status { color: var(--krea2-muted); font-size: 14px; line-height: 20px; }
+.krea2-status:empty { display: none; }
+.krea2-error { font-size: 16px; padding: 10px; border: 1px solid #b6806c; border-radius: 6px; background: #3e2c28; color: #ffddca; overflow-wrap: anywhere; }
+.krea2-retry, .krea2-apply { padding: 8px 12px; min-height: 40px; border: 1px solid #7fac9d; border-radius: 6px; background: #2a453f; color: #e1fff5 !important; align-self: flex-start; }
+.krea2-preview-head { display: flex; justify-content: space-between; gap: 8px; font-size: 16px; letter-spacing: .8px; color: #ccd8e4; }
+.krea2-preview-tag { font-size: 14px; letter-spacing: 0; color: var(--krea2-muted); }
+.krea2-stage { position: relative; min-height: 230px; flex: 1; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #586f81; border-radius: 8px; background: radial-gradient(ellipse at 50% 45%, #303e49, #202a34 73%); }
+.krea2-sheet { position: relative; flex: none; background: linear-gradient(140deg, #e5e5df, #b6c0be); border-radius: 2px; box-shadow: 0 9px 25px #0006; overflow: hidden; }
+.krea2-panel { position: absolute; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.krea2-panel svg, .krea2-panel img { display: block; width: 100%; height: 100%; object-fit: contain; overflow: hidden; }
+.krea2-baseline { position: absolute; left: 3%; right: 3%; height: 1px; background: #608a8425; pointer-events: none; }
+.krea2-empty { padding: 20px; font-size: 16px; text-align: center; color: var(--krea2-muted); }
+.krea2-stale { opacity: .75; }
+.krea2-footer { font-size: 14px; line-height: 1.4; color: var(--krea2-muted); }
+.krea2-json-editor { padding-top: 8px; }
+.krea2-json-editor summary { cursor: pointer; color: #d2e4ed; }
+.krea2-json-editor textarea { resize: vertical; min-height: 160px; width: 100%; margin-top: 8px; padding: 10px; background: #101820; border: 1px solid #687e92; border-radius: 6px; font: 16px/1.5 ui-monospace, monospace; }
+.krea2-json-editor p { font-size: 14px; color: var(--krea2-muted); }
+.krea2-json-editor .krea2-apply { display: block; }
+@container (max-width: 720px) {
+  .krea2-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .krea2-mode-row, .krea2-number-row { flex-basis: 100%; }
+  .krea2-intro { flex-wrap: wrap; gap: 3px; }
+  .krea2-pixels { flex-basis: 100%; order: 3; }
+  .krea2-experimental { margin-left: auto; }
+}
+@container (max-width: 480px) {
+  .krea2-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .krea2-preset-row { flex-wrap: wrap; }
+  .krea2-preset-row .krea2-select { flex-basis: 100%; }
+  .krea2-number-row { flex-wrap: wrap; }
+  .krea2-number-field { min-width: 120px; }
+}
+@media (prefers-reduced-motion: reduce) { .krea2-card { transition: none; } }
+.krea2-artwork { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.krea2-artwork img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.krea2-artwork svg { width: 100%; height: 100%; display: block; }
+
+/* Both tabs reuse the same remaining node area. The actual Python layout stays
+   large; the part editor never adds another vertical block beneath it. */
+.krea2-preview-head { align-items: center; border-bottom: 1px solid #586f81; min-height: 42px; letter-spacing: 0; }
+.krea2-tabs { display: flex; gap: 12px; }
+.krea2-tab { background: transparent; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px; color: var(--krea2-muted) !important; font-size: 18px !important; white-space: nowrap; }
+.krea2-tab[aria-selected=true] { color: var(--krea2-accent) !important; border-bottom-color: var(--krea2-accent); font-weight: 650; }
+.krea2-preview-tag { text-align: right; font-size: 13px; }
+.krea2-part-panel { flex: 1 0 auto; min-height: min-content; display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #586f81; border-radius: 8px; background: #1c2630; }
+.krea2-part-row { display: flex; align-items: center; gap: 12px; }
+.krea2-part-row label { font-size: 16px; color: var(--krea2-muted); }
+.krea2-part-count { font-size: 14px; color: var(--krea2-accent); white-space: nowrap; }
+.krea2-part-hint, .krea2-part-note { font-size: 14px; line-height: 1.5; color: var(--krea2-muted); }
+.krea2-prompt-label { font-size: 16px; font-weight: 600; }
+.krea2-part-input { width: 100%; flex: 1; min-height: 100px; resize: none; padding: 12px; border: 1px solid #687e92; border-radius: 6px; background: #101a23; font-size: 18px !important; line-height: 1.6 !important; }
+.krea2-part-input:disabled { opacity: .72; }
+.krea2-part-input::placeholder { color: #9bafbf; }
+.krea2-part-input[aria-invalid=true] { border-color: #e8ca95; }
+.krea2-part-bottom { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.krea2-part-length { font-size: 13px; color: var(--krea2-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.krea2-part-invalid { color: #f2d39f; }
+@container (max-width: 480px) {
+  .krea2-preview-head { flex-wrap: wrap; }
+  .krea2-preview-tag { display: none; }
+  .krea2-tab { padding: 8px; }
+  .krea2-part-panel { padding: 10px; }
+  .krea2-part-row { flex-wrap: wrap; gap: 6px; }
+  .krea2-part-count { flex-basis: 100%; }
+  .krea2-part-bottom { flex-wrap: wrap; }
+}
+
+/* Legacy anatomical-left artwork points screen-right. Match this package's
+   explicit screen-left profiles without changing the original atlas bytes,
+   source crop rectangles, layout geometry, or non-profile views. */
+.krea2-artwork[data-artwork="face_left"] > svg,
+.krea2-artwork[data-artwork="body_left"] > svg {
+  transform: scaleX(-1);
+  transform-origin: center;
+}
