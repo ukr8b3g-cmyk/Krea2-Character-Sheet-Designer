@@ -1,19 +1,16 @@
 [
   {
-    "file": "Krea2_Character_Sheet_Designer.json",
-    "nodes": 16,
-    "links": 22,
-    "status": "static_pass",
-    "sha256": "1d36950416ebbaa9f6db677209a1ee1c4474ab8fb6643830664a3cbe94606a12"
-  },
-  {
-    "file": "Krea2_Layout_Reference_Designer_Experimental.json",
-    "nodes": 7,
-    "links": 7,
+    "file": "Krea2_Layout_Reference_Designer.json",
+    "nodes": 5,
+    "links": 6,
     "subgraphs": 1,
-    "flattened_nodes": 18,
-    "validation_scope": "recursive static links, promoted controls and flattened source paths; not live graphToPrompt",
+    "subgraph_nodes": 12,
+    "subgraph_links": 35,
+    "flattened_leaf_nodes": 16,
+    "executable_leaf_nodes": 15,
+    "source_bytes_preserved": true,
+    "validation_scope": "recursive static links, saved promoted controls and flattened source paths; not live graphToPrompt",
     "status": "static_pass",
-    "sha256": "7a734d90a94d7246b30b38880948568345e4a0ccac642aa1968aaf4d62d17772"
+    "sha256": "cd15879da50979467637eeae41dc5d94cec099b4cb5bfdf4a02f925f40ba8e14"
   }
 ]

@@ -24,6 +24,24 @@ def graphs(workflow):
         yield from graphs(graph)
 
 
+def promoted_values(node, definition):
+    """Read ordered saved widgets even when their host sockets are hidden.
+
+    ComfyUI 1.53.6 exports promoted primitive controls in boundary order while
+    omitting unconnected widget sockets from the host's inputs. IMAGE ports do
+    not consume a widget value. Named values are redundant metadata, not the
+    authoritative frontend serialization, and must agree when present.
+    """
+    names = [port['name'] for port in definition['inputs']
+             if port['type'] in {'STRING', 'INT', 'FLOAT', 'COMBO', 'BOOLEAN'}]
+    values = node.get('widgets_values', [])
+    assert len(values) == len(names), 'Promoted widget count mismatch'
+    result = dict(zip(names, values))
+    for name, value in node.get('widgets_values_named', {}).items():
+        assert name in result and result[name] == value, 'Promoted named/positional mismatch'
+    return result
+
+
 def rebuild(graph):
     """Synchronize link endpoints and topological order without changing links."""
     nodes = {node['id']: node for node in graph['nodes']}
@@ -81,8 +99,6 @@ def validate_recursive(workflow):
             assert src['type'] == dst['type'] == kind, (lid, 'Port type mismatch')
             assert lid in (src['linkIds'] if source == input_id else src['links'])
             assert lid in dst['linkIds'] if target == output_id else dst['link'] == lid
-            if source != input_id and target != output_id:
-                assert nodes[source]['order'] < nodes[target]['order'], 'Invalid execution order'
         for node in nodes.values():
             assert node['mode'] == 0
             for slot, port in enumerate(node.get('inputs', [])):
@@ -93,13 +109,24 @@ def validate_recursive(workflow):
                     assert links[lid][1:3] == (node['id'], slot)
             if node['type'] in definitions:
                 definition = definitions[node['type']]
-                for kind in ('inputs', 'outputs'):
-                    assert [(p['name'], p['type']) for p in node[kind]] == [
-                        (p['name'], p['type']) for p in definition[kind]], 'Subgraph interface mismatch'
+                values = promoted_values(node, definition)
+                declared = {p['name']: p['type'] for p in definition['inputs']}
+                actual = {p['name']: p['type'] for p in node['inputs']}
+                assert len(actual) == len(node['inputs']), 'Duplicate host input'
+                assert all(declared.get(name) == kind for name, kind in actual.items()), 'Subgraph interface mismatch'
+                assert all(name in actual or name in values for name in declared), 'Missing subgraph input'
+                assert [(p['name'], p['type']) for p in node['outputs']] == [
+                    (p['name'], p['type']) for p in definition['outputs']], 'Subgraph output mismatch'
         for kind, boundary_id, endpoint in (('inputs', input_id, 1), ('outputs', output_id, 3)):
             for slot, port in enumerate(graph.get(kind, [])):
                 expected = [lid for lid, link in links.items() if link[endpoint:endpoint + 2] == (boundary_id, slot)]
-                assert port['linkIds'] == expected, 'Stale boundary links'
+                assert len(port['linkIds']) == len(expected) and set(port['linkIds']) == set(expected), 'Stale boundary links'
+        pending = set(nodes)
+        while pending:
+            ready = {nid for nid in pending if not any(
+                link[3] == nid and link[1] in pending for link in links.values())}
+            assert ready, 'Graph cycle'
+            pending -= ready
 
 
 def flatten_connections(workflow):
@@ -130,9 +157,15 @@ def flatten_connections(workflow):
 
         def child(self, node):
             if node['id'] not in self.children:
+                definition = definitions[node['type']]
+                supplied = promoted_values(node, definition)
+                for port in node['inputs']:
+                    if port.get('link') is not None:
+                        supplied[port['name']] = self.input(node, port)
+                    elif port['name'] not in supplied:
+                        supplied[port['name']] = self.input(node, port)
                 self.children[node['id']] = Context(
-                    definitions[node['type']], self.prefix + str(node['id']) + ':',
-                    {port['name']: self.input(node, port) for port in node['inputs']}, self.ancestry)
+                    definition, self.prefix + str(node['id']) + ':', supplied, self.ancestry)
             return self.children[node['id']]
 
         def output(self, node_id, slot):

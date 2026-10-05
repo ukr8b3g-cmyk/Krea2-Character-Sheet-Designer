@@ -9,6 +9,12 @@
     "identity_edit": "86f886dac23013d88996e3a2e99093ba44d322fb",
     "comfyui_schema": "5c460d8172fe30761ff67c0df3d5643bb74e0d70"
   },
+  "canonical_workflow": {
+    "path": "workflows/Krea2_Layout_Reference_Designer.json",
+    "source_filename": "Krea2_Layout_Reference_Designer_wf.json",
+    "source_sha256": "cd15879da50979467637eeae41dc5d94cec099b4cb5bfdf4a02f925f40ba8e14",
+    "source_bytes_preserved": true
+  },
   "verification_scope": "CPU / JavaScript / jsdom / HTTP / static workflow; no real ComfyUI or GPU",
   "files": [
     {
@@ -25,15 +31,15 @@
     },
     {
       "path": "NOTICE.md",
-      "size": 3111,
-      "sha256": "60c5172d358cf555345c29766489bbaebef0d4d5925dff006d949fe3c6d5ef25",
-      "git_blob_sha": "469492d89d9836dc30834364d53ca956fa2f3b89"
+      "size": 4637,
+      "sha256": "8e07cbacb9ab69c37fa612bd22742debe2efaf37c942088cce0b3fb4718b6bb9",
+      "git_blob_sha": "98a377fbc84d12f3139f065a2c25172312814ee8"
     },
     {
       "path": "README.md",
-      "size": 12068,
-      "sha256": "e9341b77e631e0dedfbf223a366e3a735d50f322ea1addc3dfdcb382bad9f0ce",
-      "git_blob_sha": "4b898fc617c619006c7598a484710b41b95bd7c1"
+      "size": 9575,
+      "sha256": "2909beffafe76a595791ee154f694ab562e8c63ee12fa4bc00cbb889de9baddf",
+      "git_blob_sha": "cbaf3f6f827a361ee4a572bac933c3edfc37701e"
     },
     {
       "path": "__init__.py",
@@ -43,9 +49,9 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "size": 6530,
-      "sha256": "3d5731a62867eb0e7f46b7b37d7179a7dd4a944740a7c936a500ec2d4cfcc394",
-      "git_blob_sha": "6dbe005a261e45431461b8089e7ffe3a183542b6"
+      "size": 8381,
+      "sha256": "826ad6a3ca555eaace6675b2e99c55470bf7ec60f081bdfaee735dbbdb8d9948",
+      "git_blob_sha": "935e431f77871f8a7ee52e78ba012a8daf120d9b"
     },
     {
       "path": "krea2_character_sheet/__init__.py",
@@ -193,9 +199,9 @@
     },
     {
       "path": "tests/test_workflows.py",
-      "size": 4537,
-      "sha256": "f1cf0a39812e721d30afad635bc479f66e0fa181e85fce8d00ecac176c98c184",
-      "git_blob_sha": "a7462838e9b6627ec9c03ca44ac9a42b5fec74c5"
+      "size": 7975,
+      "sha256": "2fb9ddc19e6516144031034f19d83fa2cfece1b1db4e7fddaacbd7405d417c6b",
+      "git_blob_sha": "8815ea50d4c2cb42893c6308707d384081e1307d"
     },
     {
       "path": "tests/upstream/__init__.py",
@@ -247,15 +253,15 @@
     },
     {
       "path": "tools/build_workflows.py",
-      "size": 15479,
-      "sha256": "24df95960c44606fa2536cf430cc31dd958cb4af07af56ff493d80e7e89c24ed",
-      "git_blob_sha": "7c9f360fb6db736eeb244c417e251569fda62a66"
+      "size": 788,
+      "sha256": "9e2d5183b9cf48131eaf0a8192b565ee0d0a8a28b64b8ce2d765207c693bd1e0",
+      "git_blob_sha": "0ec5c8493d5b8965cd71bdde7e5fad40f46d2d83"
     },
     {
       "path": "tools/make_manifest.py",
-      "size": 1208,
-      "sha256": "8381bd544b98e434182e36a8b65d8a93294aaeff23241354f790e7f232c7e661",
-      "git_blob_sha": "dabd89165b7bfd4fb47152ea4f09ea349281adf4"
+      "size": 1471,
+      "sha256": "dcf9ccc0a85d3168c2c0e7482389215cf1dc6f4f56ae0cc2563f6d19dc22fa15",
+      "git_blob_sha": "47873816a49c795767f53460813445b7aa674681"
     },
     {
       "path": "tools/upstream/LICENSE-IdentityEdit",
@@ -264,52 +270,40 @@
       "git_blob_sha": "d645695673349e3947e8e5ae42332d0ac3164cd7"
     },
     {
-      "path": "tools/upstream/krea2_designer_subgraph.json",
-      "size": 74708,
-      "sha256": "2054a784eea21ebce5342f14fbed87efc99a79aec63d22575d0bb4b5d79a0b03",
-      "git_blob_sha": "4f20410c5a65629245a95a93a555b37e353004a2"
-    },
-    {
-      "path": "tools/upstream/krea2_identity_edit.json",
-      "size": 24180,
-      "sha256": "08bd8f0f966c6eec10b7203f432aefdeb3cf9c2272f0b130e547384d93db41a4",
-      "git_blob_sha": "a707d8d27cb8504f8a63ab38babe3855ac797c59"
-    },
-    {
       "path": "tools/validate_workflows.py",
-      "size": 9467,
-      "sha256": "c550316ba5c52a5674691bcb45abdb44b90a97e8bc468c6ace3bc46f9f7f4f33",
-      "git_blob_sha": "3f66bd90fac326301aebabe5cdb13f6a1f1f77d6"
+      "size": 8056,
+      "sha256": "715f98d0723be0ee4be23ae81d65f7247f1d1a50dfc1ca2815b63da87363f374",
+      "git_blob_sha": "313b419499311137af97295caca3b110914fb6ef"
     },
     {
       "path": "tools/workflow_graph.py",
-      "size": 7692,
-      "sha256": "411591c860057127b7f9933cf5ac83024882c1c2337d18ffb9aeaf44cce2a3dc",
-      "git_blob_sha": "670a01d03c9a6b0f013a9e414c6f8468d4a9b816"
+      "size": 9539,
+      "sha256": "177e944cbab037d8b9f1f8b27a039d995534bdedfa17729a758e82f14ab0da78",
+      "git_blob_sha": "9f77b8820bb08c19f8b7f62e7516bf5527ca62fb"
     },
     {
       "path": "verification/dom_tests.log",
-      "size": 6816,
-      "sha256": "6d72233871f427d82e52edb39bf2a40f0daf8787b6a49941fe439b23b9b1ec20",
-      "git_blob_sha": "79fc5c9ef31597b990303902bc94ec315e3fa551"
+      "size": 6819,
+      "sha256": "a805a7c4c155bf70120c282bb520e1e87a8f5394b9c0f0065bc20919a26031a6",
+      "git_blob_sha": "99e87e07444a906066f1b2e8da26ecc6ab5087c2"
     },
     {
       "path": "verification/javascript_tests.log",
-      "size": 5313,
-      "sha256": "3384f96840b0a6265b31c76d14668917a7f3987d4b8df90ecaf73361835ec903",
-      "git_blob_sha": "54970c5007df2aed42e4efcae4790771d9c3d551"
+      "size": 5315,
+      "sha256": "ca2578ebfbfec88e2c571a5d018d16a913f56cb3bc62b89c43de4b9ab2276064",
+      "git_blob_sha": "4d75d2035628554dfb82e8ec314ac3fecb2d797c"
     },
     {
       "path": "verification/python_tests.log",
-      "size": 9224,
-      "sha256": "4b383b8c3ad34444ed00775d95025365178847c4c2ed3202262918caa4a88f43",
-      "git_blob_sha": "02d2b28d16019b67da1234fab3dae8cc93259e63"
+      "size": 9962,
+      "sha256": "253aec6c854bda633ef0871aa05435cf4f57ed53575ffd12bad1fd27f2808b37",
+      "git_blob_sha": "2c98797d363147720c39163e5bae0e01c988f84c"
     },
     {
       "path": "verification/workflow_results.json",
-      "size": 590,
-      "sha256": "a466ed9e9f8f70122281c4ae0d843ec196aebcee85ab8f62f0aa54718ecf4ca9",
-      "git_blob_sha": "c8380eb4a516166e7a5cbe56497e31256e2d569e"
+      "size": 505,
+      "sha256": "6251ef212497ceca34143f47a2958f53debb929058508ccbccaab8f6f3158a8c",
+      "git_blob_sha": "6a1fcc9ef58f3e36b2c6e55eb4a0eb204851e525"
     },
     {
       "path": "web/artwork.js",
@@ -372,16 +366,10 @@
       "git_blob_sha": "83c45fcccaf7091c37c49f0313e59167212db6e5"
     },
     {
-      "path": "workflows/Krea2_Character_Sheet_Designer.json",
-      "size": 32075,
-      "sha256": "1d36950416ebbaa9f6db677209a1ee1c4474ab8fb6643830664a3cbe94606a12",
-      "git_blob_sha": "eb41eafe6b20570764000e6455054b742705de36"
-    },
-    {
-      "path": "workflows/Krea2_Layout_Reference_Designer_Experimental.json",
-      "size": 68291,
-      "sha256": "7a734d90a94d7246b30b38880948568345e4a0ccac642aa1968aaf4d62d17772",
-      "git_blob_sha": "cbb292c2474c6bbeb08b15c073d3d1ee6d5c5df7"
+      "path": "workflows/Krea2_Layout_Reference_Designer.json",
+      "size": 77129,
+      "sha256": "cd15879da50979467637eeae41dc5d94cec099b4cb5bfdf4a02f925f40ba8e14",
+      "git_blob_sha": "ae1d19ae2b7f619edd829a7adc5511ad83025b81"
     }
   ]
 }

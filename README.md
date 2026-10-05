@@ -1,112 +1,86 @@
 # Krea2 Character Sheet Designer
 
-ComfyUI用のキャラクターシートDesignerです。既存H3 / Qwen版の操作を再利用し、内部プロンプトとワークフローを **Krea2 Identity Edit** 用にしました。
+ComfyUI用のキャラクターシートDesignerです。人物リファレンス1枚と、Designerが作るマネキン配置画像を **Krea2 Identity Edit** へ渡します。外部のレイアウト画像は不要です。
 
-**どちらの版も人物・キャラクターのリファレンス画像が必要です。** 標準版は配置を文章で指示し、試験版はDesigner内のマネキンから配置画像を作って追加参照へ渡します。外部のレイアウト画像を用意する必要はありません。
+## 配布workflow / Download
 
-## 2つの版
+**[Krea2_Layout_Reference_Designer.json をダウンロード](workflows/Krea2_Layout_Reference_Designer.json?raw=1)**
 
-| ノード / workflow | 人物参照 | レイアウト例 | 用途 |
-|---|---|---|---|
-| `Krea2CharacterSheetDesigner` / `Krea2_Character_Sheet_Designer.json` | 必須・1枚 | 使用しない | 推奨の標準版。配置はプロンプトで指定 |
-| `Krea2LayoutImageSheetDesigner` / `Krea2_Layout_Reference_Designer_Experimental.json` | 必須・1枚 | Designerが自動出力 | 試験版。画像1＝内蔵配置画像、画像2＝人物 |
+配布テンプレートはこの1本です。ユーザー提供の最新workflowをバイト単位で保持し、ファイル名だけ統一しています。`Krea2LayoutImageSheetDesigner` を使い、画像1＝内蔵レイアウト、画像2＝人物リファレンスの順です。
 
-試験版の「レイアウトだけ参照」はプロンプト上の役割です。モデル内部で外観と構図を完全分離する機能はなく、灰色のマネキン形状や質感が残る可能性があります。正確な配置や人物保持を保証しません。混ざる場合は標準版へ戻してください。
-
-## インストール
+## クイックスタート
 
 1. このリポジトリを `ComfyUI/custom_nodes/Krea2-Character-Sheet-Designer/` へ配置
-2. 別途 [comfyui-krea2edit](https://github.com/lbouaraba/comfyui-krea2edit) と、作者配布の [Identity Edit v1.2 LoRA](https://huggingface.co/conradlocke/krea2-identity-edit) を用意
-3. Krea2対応ComfyUIを再起動し、ブラウザーを再読込
-4. `workflows/` の標準版JSONを読み込み、画像・LoRA・モデルを手元のファイルから選択
+2. 別途 [comfyui-krea2edit](https://github.com/lbouaraba/comfyui-krea2edit) と [Identity Edit v1.2 LoRA](https://huggingface.co/conradlocke/krea2-identity-edit)、対応するKrea2モデル・CLIP・VAEを用意
+3. Krea2とサブグラフに対応したComfyUIを再起動し、ブラウザーを再読込
+4. 上のJSONを読み込み、`Image 2: CHARACTER IDENTITY / required` で自分の人物画像を選択
+5. サブグラフの公開コントロールで、手元のUNET・CLIP・VAE・LoRAを選び直してQueue
 
-Designer用に追加のpip/npmインストールは不要です。配置画像はComfyUI同梱のPillow・NumPy・torch、プレビューAPIはaiohttpを使用します。画像用ライブラリは画像出力を実行する時だけ読み込みます。モデル、LoRA、人物参照画像のダウンロードやインストールは行いません。H3版やQwen版のインストールは不要で、それぞれのノードやルートも変更しません。
+**保存されている画像名・モデル名は提供者の環境のものです。画像や重みは同梱していません。** `krea2\...` という保存パスや、内部ノードに残る `SELECT_...` は、そのまま使えることを保証しません。内部の保存値だけで判断せず、サブグラフの公開コントロールを確認してください。
 
-確認したIdentity Editノードは `1.2.5` / commit `86f886dac23013d88996e3a2e99093ba44d322fb` です。`Krea2EditModelPatch.target_latent`、pixel path、`Krea2EditGroundedEncode.image_b` を持つ版を前提にします。将来版・旧版の互換性を保証するものではありません。
+Designer用に追加のpip/npmインストールは不要です。配置画像はComfyUI環境のPillow・NumPy・torch、プレビューAPIはaiohttpを使用します。画像用ライブラリは画像出力時だけ読み込みます。H3版・Qwen版のインストールは不要で、既存のノードやルートも変更しません。
 
-### 使用するモデル
+### English quickstart
 
-- UNET: 標準版 `krea2_turbo_fp8_scaled.safetensors`、添付workflowを基にした試験版 `krea2_turbo_int8_convrot.safetensors`
-- CLIP: `qwen3vl_4b_fp8_scaled.safetensors`、type `krea2`
-- VAE: `qwen_image_vae.safetensors`
-- LoRA: `krea2_identity_edit_v1_2.safetensors`、強度1.0
+1. Place this repository in `ComfyUI/custom_nodes/Krea2-Character-Sheet-Designer/`
+2. Install [comfyui-krea2edit](https://github.com/lbouaraba/comfyui-krea2edit), the [Identity Edit v1.2 LoRA](https://huggingface.co/conradlocke/krea2-identity-edit), and compatible Krea2 / CLIP / VAE weights separately
+3. Restart a Krea2- and subgraph-capable ComfyUI, refresh the browser, then import the **[single distributed workflow](workflows/Krea2_Layout_Reference_Designer.json?raw=1)**
+4. Select your character image in `Image 2: CHARACTER IDENTITY / required`; reselect installed models and LoRA in the subgraph's exposed controls before queuing
 
-`SELECT_...` は選択前の仮名です。実ファイルに変更しないと実行できません。モデル名は作者のテンプレートに従ったもので、重みはこの配布に含みません。Krea社公式のキャラクターシートworkflowではありません。
+The saved filenames belong to the supplied workflow, not bundled assets. Layout is reference image 1; character identity is reference image 2. Defaults are five views, Manual 1696×768. This exact attachment has not been executed in ComfyUI or on a GPU in this verification environment.
 
-## 使い方
+## 保存設定と配線
 
-カテゴリは `Krea2/CharacterSheet`。標準版は `prompt: STRING`、`width: INT`、`height: INT` の3出力です。新しい試験版はその後に `layout_image: IMAGE` が付きます。
+初期配置は **5ビュー・Manual 1696×768**（body_height 672、約1.30MP）：正面胸像 → 画面左向き胸像 → 正面全身 → 画面左向き全身 → 背面全身。
 
-- prompt → `Krea2EditGroundedEncode.prompt`（positive）
+最新添付のサブグラフに保存された公開コントロールは次の値です。
+
+- UNET：`krea2\krea2_turbo_int8_convrot.safetensors`
+- CLIP：`qwen3vl_4b_fp8_scaled.safetensors`（内部typeは `krea2`）
+- VAE：`qwen_image_vae.safetensors`
+- LoRA：`krea2\krea2_identity_edit_v1_2.safetensors`（内部強度1.0）
+- seed：`1088049369132323`、steps：10、CFG：1
+- 内部設定：fixed seed / euler / simple / denoise 1 / grounding 768 / fit
+
+内部UNET・LoRAノードには別の `SELECT_...` 仮名が保存されていますが、モデル選択はサブグラフ境界から接続されています。公開コントロールの保存値と内部の予備値を混同しないでください。
+
+カテゴリは `Krea2/CharacterSheet`。`Krea2LayoutImageSheetDesigner` の出力順は `prompt: STRING`、`width: INT`、`height: INT`、`layout_image: IMAGE` です。
+
+- prompt → positiveの `Krea2EditGroundedEncode.prompt`
 - width / height → `EmptySD3LatentImage`
 - 同じEmpty latent → `KSampler.latent_image` と `Krea2EditModelPatch.target_latent`
-- 参照画像 → VAEEncode、GroundedEncode、ModelPatchのpixel path
+- layout_image → 画像1のconditioning・VAEEncode・pixel path
+- 人物画像 → 画像2の `image_b`・VAEEncode・`source_image_b` / `source_latent_b`
 
-新規ノードと同梱workflowは **5ビュー・1696×768・Manual** から開始します。正面胸像 → 画面左向き胸像 → 正面全身 → 画面左向き全身 → 背面全身。人物参照を入れてQueueし、その後同じseedで部位やビューを比較してください。
+positive・negative・VAE・pixel pathの全経路で同じ画像順です。`ref_boost=4` は最後の人物参照、`ref_boost_a=1` は配置参照に対応します。negativeは空文で、CFG 1ではnegativeの抑制に頼らずpositiveへ制約を書きます。`ModelSamplingFlux` は追加していません。
 
-### 既存Designerの操作を維持
+配置画像は同梱マネキンPNGから選択ビューを白背景RGBへ合成し、出力寸法と一致させます。UIのラベル・補助線・枠は含みません。衣装などの部位変更は画像へ描かずpromptに反映します。配布グラフには独立した `PreviewImage` ノードはありません。
 
-7ビュー、8部位入力、Auto / Manual、高解像度の手入力、日本語 / 英語UI、保存・復元、Undo連携を引き継いでいます。
+## Designerの操作と互換性
 
 - 7ビュー：正面胸像、画面左向き胸像、全身正面、画面左向き全身、全身背面、両手詳細、足・履物詳細
 - 8部位：頭・髪、顔、上半身の服、背面の服、下半身、手・手袋、足・履物、全体・その他
+- Auto / Manual、高解像度の手入力、日本語 / 英語UI、保存・復元、Undo連携を維持
 - ビューと部位入力は即時保存。数値の手入力はEnterまたはフォーカスを外すと確定
-- 手足の詳細をOFFにしても、手袋や靴の指示は全身へ適用
-- 背面の服の指示は後ろ側の衣服表面だけに適用。背面で顔を見せる振り向きは要求しない
-- 部位入力は原文のまま保持し、自動翻訳しない。英語の定型文に各指示を一度ずつ入れる
-- 左向きの胸像・全身はUIと生成用配置画像の両方で左右反転して、画面左向きの指示と一致。元マネキンPNGと配置座標は変更しない
-- UIのプレビューは配置ガイド。人物の生成結果や部位変更の見た目は表示しない
-- UI言語はComfyUIの `Comfy.Locale` がja系なら日本語、それ以外は英語
+- 手足の詳細をOFFにしても、手袋や靴の指示は全身へ適用。背面の服の指示は後ろ側の衣服表面だけに適用
+- 部位入力は原文を保持し、自動翻訳しない。英語の静止画promptへ各指示を一度ずつ入れる
+- 左向きの胸像・全身はUIと配置画像の両方で反転。元PNGと配置座標は変更しない
+- UIのプレビューは配置ガイドで、生成結果や衣装変更の見た目は表示しない
+- `Comfy.Locale` がja系なら日本語、それ以外は英語
 
-Krea用コンパイラーは英語の静止画指示を直接作ります。H3の動画・音声指示やQwenのレイアウトJSONは出力しません。標準版はビュー位置を自然言語と割合で指示します。新しい試験版は配置画像を一対一で人物へ置換する指示を使い、割合の再指定はしません。どちらもマスクやControlNetのような配置強制ではありません。
+`state_json` が唯一の保存入力で、既存schema v1/v2を受理します。v1は読込だけでは移行せず、実際の部位編集時にv2へ進みます。64KiB上限、32以上の32倍数、ComfyUI `MAX_RESOLUTION`、部位ごと1000 UTF-16単位などを検証し、不正JSONを黙って初期化しません。
 
-### 保存互換性とサイズ
+Autoは基準高を保って寸法を算出し、32単位へ切り上げます。Manualは指定キャンバスへ縦横比を保って配置し、ビュー変更で寸法を変えません。既存の高解像度stateを自動縮小しません。
 
-`state_json` だけが保存入力で、既存schema v1/v2をそのまま受理します。参照モードをstateへ追加せず、ノード型で区別します。旧 `Krea2LayoutReferenceSheetDesigner` はLegacy扱いで登録を残し、保存済みの外部レイアウトworkflowと3出力を維持します。新規の同梱試験版では使いません。v1は読込だけで移行せず、実際の部位編集時にv2へ進みます。高解像度の既存stateを黙って縮小しません。
-
-64KiB上限、32以上の32倍数、ComfyUI `MAX_RESOLUTION`、部位ごと1000 UTF-16単位などを検証します。不正JSONを勝手に初期値へ置き換えません。
-
-Autoは基準高を保って幅・高さを算出し、32単位へ切り上げます。Manualは指定キャンバスに縦横比を保って配置し、ビューを変更しても寸法を変えません。寸法計算は既存H3 / Qwen版と同じです。
-
-作者の目安は約1MPから、まず2MP以下での確認です。1696×768は約1.30MPです。高解像度は編集可能ですが、VRAM・速度・品質を保証しません。UIの `Experimental` 表示は引き継いだ1,032,192画素の注意閾値であり、Krea固有の品質・VRAM上限ではありません。
-
-### Identity Edit設定
-
-10 steps / CFG 1 / euler / simple / denoise 1 / LoRA 1.0 / fixed seed `1088049369132323` / grounding 768 / fit。
-
-- `ref_boost=4`：最後の参照を強める。標準版では人物、試験版でも2枚目の人物
-- `ref_boost_a=1`：試験版の1枚目（レイアウト）に対応。標準版の1枚参照では効果なし
-- negativeは空文＋同じ画像順。CFG 1ではnegativeによる抑制が効かないため、必要な制約はpositiveに記述
-- `vae` と生の参照画像を接続し、pixel pathを使用
-- 同じlatentをtarget_latentへ接続してsampling前に参照をencode。出力寸法と別のlatentを接続しない
-
-通常のKrea Core用に追加した `ModelSamplingFlux` をこのIdentity Editグラフへ独断で挿入していません。作者のモデル経路を維持しています。
-
-## 内蔵レイアウト画像を使う試験版
-
-[試験版workflow](workflows/Krea2_Layout_Reference_Designer_Experimental.json)を差し替えました。ユーザー提供のサブグラフ構成を基に、Designerの4番目の出力から選択ビューの配置画像を渡します。
-
-1. `layout_image` → 画像1の `image` / `source_latent` / `source_image`
-2. 人物リファレンス1枚 → 画像2の `image_b` / `source_latent_b` / `source_image_b`
-
-positive、negative、VAE、pixel pathのすべてで同じ順序です。作者のscene-first / subject-second順序を維持し、最後の参照を強める `ref_boost=4` は人物、`ref_boost_a=1` は配置に対応します。
-
-- 生成用の配置画像は同梱マネキンPNGを切り出して合成するため、追加の生成モデルや画像アップロードは不要
-- `width` / `height` と同寸の白背景RGB。選択したビューのみ、同じ配置計算・縦横比・左向きで描画
-- UIのラベル・背景グラデーション・足元の補助線・枠線は生成用画像に含めない
-- 配置画像を `PreviewImage` でも確認可能。部位指示による衣装などの変更は配置画像には描かず、生成時のpromptへ反映
-- サブグラフ内のモデル・LoRA・seed・steps・CFGなどは、添付workflowの構成と値を保持。画像やモデルの個人環境のパスは配布用の選択名へ置換
-- 最初の3出力の順番を維持。標準版workflowは変更しない
-
-新しいノードを使う前にComfyUIを再起動し、ブラウザーも再読込してから、新しい試験版JSONを読み込んでください。既存の外部レイアウト版が自動で新ノードへ変わることはありません。
-
-2画像をモデルが厳密に分離する保証はありません。灰色の残存、顔・服・画風の変化、人数や配置・向きのずれを確認し、標準版と同じseedで比較してください。高解像度は自動縮小せず、その寸法の配置画像をCPU上で作るため、大きいサイズほどRAMも消費します。
+**テンプレートの一本化でノード機能は削除していません。** `Krea2CharacterSheetDesigner` とLegacyの `Krea2LayoutReferenceSheetDesigner` は登録と従来の3出力・prompt動作を維持し、保存済みworkflowを引き続き扱えます。新しい配布テンプレートは4出力の `Krea2LayoutImageSheetDesigner` だけを使用します。
 
 ## 検証と限界
 
-[検証記録](docs/VERIFICATION.md)を参照してください。CPUコンパイラー、実際の配置画像の画素、JavaScript、模擬UI、workflowの静的構造を検証します。実torchテンソルを使うテストは環境にtorchがないため未実行です。
+確認対象のIdentity Editは `1.2.5` / [commit 86f886da](https://github.com/lbouaraba/comfyui-krea2edit/tree/86f886dac23013d88996e3a2e99093ba44d322fb) です。`target_latent`、pixel path、`image_b` を持つ版が必要です。任意のComfyUI・frontend・将来版との互換性を保証しません。
 
-**実ComfyUI frontendへの読込、実Queue、GPU生成、保存PNGの寸法・メタデータ、画質・人物保持・速度・VRAMは未検証です。** ユーザーが提示した従来の5ビュー結果は、この新しいコンパイラーや2画像版の合格証拠ではありません。
+[検証記録](docs/VERIFICATION.md)は、今回の添付JSONの確認と過去のノード回帰検証を分けて記録しています。**今回の環境では実torch・実ComfyUI frontend・Queue・GPU生成を未検証です。** 保存PNG、速度、VRAM、画質、人物保持の実測はありません。
+
+レイアウトと人物の役割分離はpromptによる誘導です。マスクやControlNetのような配置強制ではなく、灰色の残存や顔・服・画風・人数・向きのずれが起こり得ます。高解像度ではVRAMに加え、CPU配置画像のRAMも増えます。UIの `Experimental` 表示は引き継いだ1,032,192画素の注意閾値であり、Krea固有の品質・VRAM上限ではありません。Krea社公式workflowではありません。
 
 ## 開発用テスト
 
@@ -114,16 +88,13 @@ positive、negative、VAE、pixel pathのすべてで同じ順序です。作者
 python -m unittest discover -s tests -p 'test_*.py' -v
 node --test tests/js/*.test.js
 KREA2_JSDOM_PATH=/path/to/jsdom/lib/api.js node --test tests/dom/*.test.js
-python tools/build_workflows.py
 python tools/validate_workflows.py
 ```
 
-jsdomは任意の開発用依存で、ComfyUI実行には不要です。Chromium用の独立UI harnessも `tests/browser/` にありますが、この環境ではブラウザー起動制約により未実行です。ComfyUI本体やPinia、実際のgraphToPromptは模擬テストの対象外です。
+jsdomと `tests/browser/` のChromium harnessは任意の開発用ツールで、ノード実行には不要です。模擬UIテストは実ComfyUIやgraphToPromptの代わりにはなりません。
 
 ## 出典
 
-配置画像の描画手法: [Qwen版 f6274130](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/f627413028f2c2e05b75ed2b09a30947dea1fec6)。Krea向けに左向き・枠なしへ調整。Qwen版で報告されたGPU検証は、このKrea版の実測ではありません。
+UI/state/geometry：[Qwen 604ec0c6](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/604ec0c6ea4046a3460e2c662d41f564870c15d8)、元の[H3 bf792c65](https://github.com/ukr8b3g-cmyk/H3-Character-Sheet-Designer/tree/bf792c652a9f50e895409e49fce667fef0f73c25)。配置画像：[Qwen f6274130](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/f627413028f2c2e05b75ed2b09a30947dea1fec6)を基に左向き・枠なしへ調整。
 
-UI/state/geometry: [Qwen版 604ec0c6](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/604ec0c6ea4046a3460e2c662d41f564870c15d8)、元の[H3版 bf792c65](https://github.com/ukr8b3g-cmyk/H3-Character-Sheet-Designer/tree/bf792c652a9f50e895409e49fce667fef0f73c25)。
-
-Identity Edit: [作者workflowとコード 86f886da](https://github.com/lbouaraba/comfyui-krea2edit/tree/86f886dac23013d88996e3a2e99093ba44d322fb)。詳細は [NOTICE.md](NOTICE.md)。新しいライセンスを上流素材へ割り当てません。モデル重みは別配布・別ライセンスです。
+Identity Edit：[作者コード 86f886da](https://github.com/lbouaraba/comfyui-krea2edit/tree/86f886dac23013d88996e3a2e99093ba44d322fb)。ライセンスとworkflowの来歴は [NOTICE.md](NOTICE.md)。重みは別配布・別ライセンスです。Qwen版のGPU報告や過去の参考画像は、この添付workflowの実行証拠ではありません。
