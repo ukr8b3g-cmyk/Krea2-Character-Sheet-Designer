@@ -1,7 +1,7 @@
 {
   "package": "Krea2 Character Sheet Designer",
   "version": "0.2.0",
-  "date_utc": "2026-10-05",
+  "date_utc": "2026-10-19",
   "sources": {
     "qwen": "604ec0c6ea4046a3460e2c662d41f564870c15d8",
     "qwen_layout_image": "f627413028f2c2e05b75ed2b09a30947dea1fec6",
@@ -30,16 +30,22 @@
       "git_blob_sha": "92f4c9cbf9a58695db47a169851cfc832b53b455"
     },
     {
+      "path": "LICENSE",
+      "size": 1069,
+      "sha256": "15fd1cdc62ffa959b49fd5088bdb1d4b5fa406fa8e420de64603e86458a1a3b8",
+      "git_blob_sha": "53a9ece3286ae2946591f72fa263bdbc8f1b37d3"
+    },
+    {
       "path": "NOTICE.md",
-      "size": 4637,
-      "sha256": "8e07cbacb9ab69c37fa612bd22742debe2efaf37c942088cce0b3fb4718b6bb9",
-      "git_blob_sha": "98a377fbc84d12f3139f065a2c25172312814ee8"
+      "size": 5841,
+      "sha256": "2c103bd62b5127f09500eec94af798da58f01d9f2dd01dea91ecd7efcc6e0e74",
+      "git_blob_sha": "b7d4d311eb0e98bf5f59c507e9993978381f3d44"
     },
     {
       "path": "README.md",
-      "size": 9575,
-      "sha256": "2909beffafe76a595791ee154f694ab562e8c63ee12fa4bc00cbb889de9baddf",
-      "git_blob_sha": "cbaf3f6f827a361ee4a572bac933c3edfc37701e"
+      "size": 10254,
+      "sha256": "b94f043d3057c81b521223bebf9e12f0c75e0242a66dd80c20460af113d9f8bb",
+      "git_blob_sha": "2aee89f3d80816da5486c025a08c6a2592b93f8b"
     },
     {
       "path": "__init__.py",
@@ -109,15 +115,15 @@
     },
     {
       "path": "package.json",
-      "size": 196,
-      "sha256": "5cfe69937d257d6391c270d40aca09a3b7a6569e39d7286f8f235015274b784f",
-      "git_blob_sha": "b30efff81a9ccca6baeff3263547e9edd293f17c"
+      "size": 216,
+      "sha256": "37dab5f887a7e5449401ce5f1e00952b16f1411913c93546fa38552c5cca3028",
+      "git_blob_sha": "27c7d05ed48269f4ed27fefaef88605515a39323"
     },
     {
       "path": "pyproject.toml",
-      "size": 425,
-      "sha256": "04b8b61e146150467b3a0363fe48bf70e818461acb1e5ac261e801aa2ede8394",
-      "git_blob_sha": "f64bf1acbcb35bcd0f5804e2dc15ee25a93bd29b"
+      "size": 456,
+      "sha256": "a4a4dcfce846dd201634dfa1d5b09d8c9ca740ff36c53f20814b038ba6876a6c",
+      "git_blob_sha": "b1161e01c3a523c5a79169e50b9e75d2e323326b"
     },
     {
       "path": "tests/__init__.py",

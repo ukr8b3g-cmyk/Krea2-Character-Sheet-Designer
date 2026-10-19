@@ -98,3 +98,9 @@ jsdomと `tests/browser/` のChromium harnessは任意の開発用ツールで�
 UI/state/geometry：[Qwen 604ec0c6](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/604ec0c6ea4046a3460e2c662d41f564870c15d8)、元の[H3 bf792c65](https://github.com/ukr8b3g-cmyk/H3-Character-Sheet-Designer/tree/bf792c652a9f50e895409e49fce667fef0f73c25)。配置画像：[Qwen f6274130](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/tree/f627413028f2c2e05b75ed2b09a30947dea1fec6)を基に左向き・枠なしへ調整。
 
 Identity Edit：[作者コード 86f886da](https://github.com/lbouaraba/comfyui-krea2edit/tree/86f886dac23013d88996e3a2e99093ba44d322fb)。ライセンスとworkflowの来歴は [NOTICE.md](NOTICE.md)。重みは別配布・別ライセンスです。Qwen版のGPU報告や過去の参考画像は、この添付workflowの実行証拠ではありません。
+
+## ライセンス / License
+
+作者のコード・文書・テスト・PNG/SVG素材（H3/Qwen版から移植した本人作成部分を含む）は、作者が保有する権利の範囲で [MIT License](LICENSE) です。Identity Edit由来のworkflow部分は既存のApache-2.0表記とライセンスを維持します。来歴と適用範囲は [NOTICE.md](NOTICE.md) を参照してください。
+
+The maintainer-authored code, documentation, tests, and PNG/SVG artwork, including the maintainer's H3/Qwen ports, are covered by MIT to the extent of rights held. Identity Edit-derived workflow material retains its existing Apache-2.0 terms; see [NOTICE.md](NOTICE.md).

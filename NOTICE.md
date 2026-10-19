@@ -1,6 +1,14 @@
 # Source provenance and licensing
 
-This is a derivative of the user's Designer code. It does not assign a new blanket license to upstream material.
+The maintainer-authored Designer code, documentation, tests, and artwork are
+licensed under the [MIT License](LICENSE), to the extent of rights held by
+ukr8b3g-cmyk. This includes the maintainer's code ported from the H3/Qwen
+Designer projects identified below, the bundled `web/assets/mannequin-atlas.png`,
+and the maintainer-authored PNG/SVG artwork (including SVG artwork embedded
+in JavaScript). The H3/Qwen Designer projects linked below are also authored
+by ukr8b3g-cmyk. This grant does not
+replace the Apache-2.0 terms for the Identity Edit-derived workflow material
+or any other existing third-party rights.
 
 ## Designer
 
@@ -13,7 +21,7 @@ The common state and geometry modules and web state controller are unchanged fro
 
 The layout-image rendering approach is adapted from [Qwen Designer commit f627413028f2c2e05b75ed2b09a30947dea1fec6](https://github.com/ukr8b3g-cmyk/Qwen-Image-2.1-Character-Sheet-Designer/blob/f627413028f2c2e05b75ed2b09a30947dea1fec6/qwen_image21_character_sheet/layout_image.py), Git blob `041d9e12d122e21fe4b6bdd1b679e79cbbc20cfd`. Krea keeps screen-left profiles and omits black panel frames.
 
-Preserve applicable upstream notices and licensing when redistributing. This repository does not assert that the H3/Qwen material is Apache-2.0.
+The maintainer-authored H3/Qwen material described above is covered by this MIT grant. Preserve applicable third-party notices when redistributing; the H3/Qwen ports are not asserted to be Apache-2.0.
 
 ## Identity Edit ancestry
 
@@ -35,3 +43,16 @@ On 2026-10-05, the user's latest `Krea2_Layout_Reference_Designer_wf.json` was s
 The supplied graph retains its saved image filename, model paths, widget values, positions, IDs, links, metadata and embedded notices. Earlier wording inside its Note and `extra` metadata, including “sanitized filenames” and “experimental”, records the graph's history; it is not a claim that this publication sanitized or regenerated the latest attachment. Users must select their own installed model files and character image before running it.
 
 The earlier static schema review used [ComfyUI commit 5c460d8172fe30761ff67c0df3d5643bb74e0d70](https://github.com/Comfy-Org/ComfyUI/tree/5c460d8172fe30761ff67c0df3d5643bb74e0d70). The supplied graph retains its SaveImage IMAGE output and EmptySD3LatentImage contract. This provenance does not establish execution or compatibility with every installed ComfyUI/frontend version; see [verification scope](docs/VERIFICATION.md).
+
+## Rights and third-party material
+
+This grant covers only rights held by ukr8b3g-cmyk. Existing third-party
+copyrights, character rights, trademarks, and other rights remain with their
+respective owners. It does not relicense external applications, dependencies,
+fonts, model weights, or models used to generate images. Their own terms
+continue to apply. References to products or compatibility do not imply
+authorship of their code or endorsement.
+
+This notice explains the scope of [LICENSE](LICENSE); it adds no conditions
+to the MIT License. Preserve applicable notices for any third-party material
+actually included in a redistribution.
